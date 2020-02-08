@@ -1,5 +1,6 @@
 package com.arie.onlineloan;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvEmail, tvPassword;
     private User userModel;
     private UserPreference mUserPreference;
+    ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mUserPreference = new UserPreference(this);
         userModel = mUserPreference.getUser();
-        if (userModel.getUserId() != null) {
+        if (userModel.getUserId() != null && userModel.getUserEmail() != null && userModel.getUserPassword() != null) {
             hitLogin(userModel.getUserEmail(), userModel.getUserPassword());
         }
         userModel = new User();
@@ -77,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void hitLogin(final String userEmail, final String userPassword) {
+        loading = ProgressDialog.show(LoginActivity.this, "Loading Data...", "Please Wait...", false, false);
         RequestQueue mRequestQueue = Volley.newRequestQueue(LoginActivity.this);
 
         StringRequest mStringRequest = new StringRequest(Request.Method.POST, phpConf.URL_LOGIN, new Response.Listener<String>() {
@@ -100,23 +103,26 @@ public class LoginActivity extends AppCompatActivity {
                     //String userRole = jo.getString("ROLE");
                     String message = jo.getString("message");
 
+                    loading.dismiss();
+
                     Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     if (response.equals("1")) {
                         saveUser(userId, userPass, userName, userEmail, userAddress, userPhone);
                         Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intentMain);
-                        Toast.makeText(LoginActivity.this, "Welcome, "+ userName, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Welcome, " + userName + " !", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
+                    loading.dismiss();
                     e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                loading.dismiss();
                 Toast.makeText(LoginActivity.this, getString(R.string.msg_connection_error), Toast.LENGTH_SHORT).show();
             }
         }) {

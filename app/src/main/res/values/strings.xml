@@ -10,7 +10,7 @@
     <string name="address">Address</string>
     <string name="re_type_password">Re-type Password</string>
     <string name="register">Register</string>
-    <string name="hai_selamat_datang_di_online_loan">Hai, Selamat Datang di Online Loan!</string>
+    <string name="welcome">Hai, %1$s !\nSelamat Datang di Online Loan!</string>
     <string name="msg_load_error">Failed to load data!</string>
     <string name="msg_connection_error">Failed to connect to server!</string>
 </resources>
