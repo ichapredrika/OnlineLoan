@@ -19,7 +19,7 @@
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_username"
+            android:id="@+id/txt_fullname"
             android:hint="@string/full_name"
             android:inputType="textPersonName"
             android:layout_width="match_parent"

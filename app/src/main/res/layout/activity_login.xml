@@ -18,7 +18,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/loginTxt"
+        android:id="@+id/login_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -42,7 +42,7 @@
         android:textSize="15sp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtPassword"
+        android:id="@+id/txt_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -50,7 +50,7 @@
         app:passwordToggleTint="@color/colorGreen1">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_pass"
+            android:id="@+id/txt_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingTop="10dp"

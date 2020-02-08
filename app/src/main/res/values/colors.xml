@@ -13,4 +13,5 @@
     <color name="colorGray1"> #8C9AA5 </color>
     <color name="colorGreen1">#00796B</color>
     <color name="colorOrangeDark">#EF6C00</color>
+    <color name="colorOrangeSoft">#A6EF6C00</color>
 </resources>
