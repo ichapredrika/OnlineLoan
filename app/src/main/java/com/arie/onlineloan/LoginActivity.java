@@ -44,7 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mUserPreference = new UserPreference(this);
         userModel = mUserPreference.getUser();
-        if (userModel.getUserId() != null && userModel.getUserEmail() != null && userModel.getUserPassword() != null) {
+        Log.d("tag", userModel.getUserId().toString());
+        if (userModel.getUserId() != null && !userModel.getUserId().equals("")) {
             hitLogin(userModel.getUserEmail(), userModel.getUserPassword());
         }
         userModel = new User();
@@ -123,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 loading.dismiss();
+                Log.d("tag", String.valueOf(error));
                 Toast.makeText(LoginActivity.this, getString(R.string.msg_connection_error), Toast.LENGTH_SHORT).show();
             }
         }) {
