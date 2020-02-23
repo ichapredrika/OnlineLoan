@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextView tvEmail, tvPassword;
     private User userModel;
-    private UserPreference mUserPreference;
     ProgressDialog loading;
 
     @Override
@@ -42,11 +41,11 @@ public class LoginActivity extends AppCompatActivity {
         Button btnLogin = findViewById(R.id.btn_login);
         TextView tvRegister = findViewById(R.id.txt_register);
 
-        mUserPreference = new UserPreference(this);
+        UserPreference mUserPreference = new UserPreference(this);
         userModel = mUserPreference.getUser();
         Log.d("tag", userModel.getUserId().toString());
         if (userModel.getUserId() != null && !userModel.getUserId().equals("")) {
-            hitLogin(userModel.getUserEmail(), userModel.getUserPassword());
+            hitLogin(userModel.getEmail(), userModel.getPassword());
         }
         userModel = new User();
 
@@ -97,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                     String response = jo.getString("response");
                     String userId = jo.getString("ID");
                     String userName = jo.getString("FULLNAME");
+                    String userNik = jo.getString("NIK");
                     String userEmail = jo.getString("EMAIL");
                     String userPass = jo.getString("PASSWORD");
                     String userPhone = jo.getString("PHONE");
@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     if (response.equals("1")) {
-                        saveUser(userId, userPass, userName, userEmail, userAddress, userPhone);
+                        saveUser(userId, userPass, userName, userEmail, userAddress, userPhone, userNik);
                         Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intentMain);
                         Toast.makeText(LoginActivity.this, "Welcome, " + userName + " !", Toast.LENGTH_SHORT).show();
@@ -141,14 +141,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void saveUser(String userId, String userPassword, String userFullname, String userEmail,
-                  String userAddress, String userPhone) {
+                  String userAddress, String userPhone, String userNik) {
         UserPreference userPreference = new UserPreference(this);
         userModel.setUserId(userId);
-        userModel.setUserPassword(userPassword);
-        userModel.setUserFullName(userFullname);
-        userModel.setUserEmail(userEmail);
-        userModel.setUserPhone(userPhone);
-        userModel.setUserAddress(userAddress);
+        userModel.setPassword(userPassword);
+        userModel.setFullname(userFullname);
+        userModel.setNik(userNik);
+        userModel.setEmail(userEmail);
+        userModel.setPhone(userPhone);
+        userModel.setAddress(userAddress);
         //userModel.setUserRole(userRole);
 
         userPreference.setUser(userModel);

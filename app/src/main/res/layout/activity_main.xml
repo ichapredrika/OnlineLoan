@@ -10,9 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@color/colorWhite">
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,14 +28,14 @@
 
             <TextView
                 android:id="@+id/loginTxt"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/online_loan"
-                android:textColor="@color/colorGreen1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="@string/online_loan"
+                android:textColor="@color/colorGreen1"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
@@ -44,67 +44,54 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_logout"/>
+                app:srcCompat="@drawable/ic_logout"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/txt_welcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="@string/welcome"/>
+            tools:text="@string/welcome" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
+        android:layout_height="0dp"
+        android:layout_gravity="start"
         android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:layout_margin="16dp">
+        <Button
+            android:id="@+id/btn_with_collateral"
+            style="@style/Button.Neutral"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="@string/loan_with_collateral"
+            android:textColor="@color/colorGreen1" />
 
-            <ImageButton
-                android:id="@+id/btn_with_collateral"
-                style="@style/Button.Neutral"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/ic_cash" />
+        <Button
+            android:id="@+id/btn_without_collateral"
+            style="@style/Button.Neutral"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/loan_without_collateral"
+            android:textColor="@color/colorGreen1" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Loan with \nCollateral"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:layout_margin="16dp">
-
-            <ImageButton
-                android:id="@+id/btn_without_collateral"
-                style="@style/Button.Neutral"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/ic_cash" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Loan without \nCollateral"/>
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn_profile"
+            style="@style/Button.Neutral"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/profile"
+            android:textColor="@color/colorGreen1" />
     </LinearLayout>
 
 </LinearLayout>

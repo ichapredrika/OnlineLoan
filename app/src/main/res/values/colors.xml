@@ -14,4 +14,9 @@
     <color name="colorGreen1">#00796B</color>
     <color name="colorOrangeDark">#EF6C00</color>
     <color name="colorOrangeSoft">#A6EF6C00</color>
+    <color name="colorTextBrown">#303035</color>
+    <color name="colorTextGray">#95919B</color>
+    <color name="colorTextSoft">#ABA6B2</color>
+    <color name="colorBgGreen">#9000796B</color>
+
 </resources>

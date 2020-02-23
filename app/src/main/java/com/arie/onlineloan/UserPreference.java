@@ -11,6 +11,7 @@ public class UserPreference {
     private static final String USER_ID = "userId";
     private static final String USER_FULLNAME = "userName";
     private static final String USER_EMAIL = "userEmail";
+    private static final String USER_NIK = "useNik";
     private static final String USER_ADDRESS = "userAddress";
     private static final String USER_PHONE = "userPhone";
     private static final String USER_ROLE = "userRole";
@@ -26,11 +27,12 @@ public class UserPreference {
     public void setUser(User value) {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(USER_ID, value.getUserId());
-        editor.putString(USER_PASSWORD, value.getUserPassword());
-        editor.putString(USER_FULLNAME, value.getUserFullName());
-        editor.putString(USER_EMAIL, value.getUserEmail());
-        editor.putString(USER_ADDRESS, value.getUserAddress());
-        editor.putString(USER_PHONE, value.getUserPhone());
+        editor.putString(USER_PASSWORD, value.getPassword());
+        editor.putString(USER_FULLNAME, value.getFullname());
+        editor.putString(USER_NIK, value.getNik());
+        editor.putString(USER_EMAIL, value.getEmail());
+        editor.putString(USER_ADDRESS, value.getAddress());
+        editor.putString(USER_PHONE, value.getPhone());
        /* editor.putString(USER_ROLE, value.getUserRole());
         */
 
@@ -40,11 +42,12 @@ public class UserPreference {
     public User getUser() {
         User model = new User();
         model.setUserId(preferences.getString(USER_ID, ""));
-        model.setUserPassword(preferences.getString(USER_PASSWORD, ""));
-        model.setUserFullName(preferences.getString(USER_FULLNAME, ""));
-        model.setUserEmail(preferences.getString(USER_EMAIL, ""));
-        model.setUserAddress(preferences.getString(USER_ADDRESS, ""));
-        model.setUserPhone(preferences.getString(USER_PHONE, ""));
+        model.setPassword(preferences.getString(USER_PASSWORD, ""));
+        model.setFullname(preferences.getString(USER_FULLNAME, ""));
+        model.setNik(preferences.getString(USER_NIK, ""));
+        model.setEmail(preferences.getString(USER_EMAIL, ""));
+        model.setAddress(preferences.getString(USER_ADDRESS, ""));
+        model.setPhone(preferences.getString(USER_PHONE, ""));
       /*  model.setUserRole(preferences.getString(USER_ROLE, ""));
        */
 

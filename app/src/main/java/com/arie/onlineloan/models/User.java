@@ -5,11 +5,12 @@ import android.os.Parcelable;
 
 public class User implements Parcelable {
     private String userId;
-    private String userPassword;
-    private String userFullName;
-    private String userPhone;
-    private String userEmail;
-    private String userAddress;
+    private String password;
+    private String fullname;
+    private String nik;
+    private String phone;
+    private String email;
+    private String address;
 
     public User() {
 
@@ -23,53 +24,62 @@ public class User implements Parcelable {
         this.userId = userId;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getUserFullName() {
-        return userFullName;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setUserFullName(String userFullName) {
-        this.userFullName = userFullName;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
-    public String getUserPhone() {
-        return userPhone;
+    public String getNik() {
+        return nik;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setNik(String nik) {
+        this.nik = nik;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getUserAddress() {
-        return userAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public User(String userId, String userPassword, String userFullName, String userPhone, String userEmail, String userAddress) {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public User(String userId, String password, String fullname, String nik, String phone, String email, String address) {
         this.userId = userId;
-        this.userPassword = userPassword;
-        this.userFullName = userFullName;
-        this.userPhone = userPhone;
-        this.userEmail = userEmail;
-        this.userAddress = userAddress;
+        this.password = password;
+        this.fullname = fullname;
+        this.nik = nik;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
     }
 
     @Override
@@ -80,20 +90,22 @@ public class User implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.userId);
-        dest.writeString(this.userPassword);
-        dest.writeString(this.userFullName);
-        dest.writeString(this.userPhone);
-        dest.writeString(this.userEmail);
-        dest.writeString(this.userAddress);
+        dest.writeString(this.password);
+        dest.writeString(this.fullname);
+        dest.writeString(this.nik);
+        dest.writeString(this.phone);
+        dest.writeString(this.email);
+        dest.writeString(this.address);
     }
 
     protected User(Parcel in) {
         this.userId = in.readString();
-        this.userPassword = in.readString();
-        this.userFullName = in.readString();
-        this.userPhone = in.readString();
-        this.userEmail = in.readString();
-        this.userAddress = in.readString();
+        this.password = in.readString();
+        this.fullname = in.readString();
+        this.nik = in.readString();
+        this.phone = in.readString();
+        this.email = in.readString();
+        this.address = in.readString();
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {

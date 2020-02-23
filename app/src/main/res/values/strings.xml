@@ -13,4 +13,24 @@
     <string name="welcome">Hai, %1$s !\nSelamat Datang di Online Loan!</string>
     <string name="msg_load_error">Failed to load data!</string>
     <string name="msg_connection_error">Failed to connect to server!</string>
+    <string name="nik_no_ktp">NIK (No KTP)</string>
+    <string name="loan_with_collateral">Loan with Collateral</string>
+    <string name="loan_without_collateral">Loan without Collateral</string>
+    <string name="profile">Profile</string>
+    <string name="borrower_data">Borrower Data</string>
+    <string name="see_detail">See Detail…</string>
+    <string name="loan_amount">Loan Amount</string>
+    <string name="loan">Loan</string>
+    <string name="time_period">Time Period</string>
+    <string name="min_loan">Min Rp. %1$s</string>
+    <string name="max_loan">Max Rp. %1$s</string>
+    <string name="min_time">Min %1$s Months</string>
+    <string name="max_time">Max %1$s Months</string>
+    <string name="rp_1_000_000">Rp.1.000.000</string>
+    <string name="calculation">Calculation</string>
+    <string name="interest">Interest</string>
+    <string name="loan_total">Loan Total</string>
+    <string name="installment_per_month">Installment per Month</string>
+    <string name="terms_and_condition">Terms and Condition</string>
+    <string name="accept_and_apply_loan">Accept and Apply Loan</string>
 </resources>
