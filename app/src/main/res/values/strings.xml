@@ -33,4 +33,17 @@
     <string name="installment_per_month">Installment per Month</string>
     <string name="terms_and_condition">Terms and Condition</string>
     <string name="accept_and_apply_loan">Accept and Apply Loan</string>
+    <string name="collateral">Collateral</string>
+    <string name="choose_collateral">Choose Collateral</string>
+    <string name="car">Car</string>
+    <string name="motorcycle">Motorcycle</string>
+    <string name="house">House</string>
+    <string name="location">Location</string>
+    <string name="area_size_m2">Area Size (m2)</string>
+    <string name="estimated_price_rp">Estimated Price (Rp.)</string>
+    <string name="upload_stnk">Upload STNK</string>
+    <string name="upload_bpkb">Upload BPKB</string>
+    <string name="upload_house_photo">Upload House Photo</string>
+    <string name="upload_house_certificate">Upload House Certificate</string>
+    <string name="check_loan">Check Loan</string>
 </resources>

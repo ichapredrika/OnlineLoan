@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGray4"
+    tools:context=".WithCollateralActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            style="@style/Text.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/borrower_data" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="10dp"
+            app:contentPadding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    style="@style/Text.Caption"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/colorGreen1"
+                    tools:text="Arie Sukma Tarigan" />
+
+                <TextView
+                    android:id="@+id/txt_nik"
+                    style="@style/Text.Caption"
+                    android:layout_marginBottom="5dp"
+                    tools:text="001201500032" />
+
+                <TextView
+                    android:id="@+id/txt_detail"
+                    style="@style/Text.Caption"
+                    android:gravity="end"
+                    android:text="@string/see_detail"
+                    android:textColor="@color/colorTextGray"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            style="@style/Text.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/collateral" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    style="@style/Text.Caption"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/choose_collateral"
+                    android:textSize="15sp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_collateral"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rb_car"
+                        style="@style/TextVertical.Caption"
+                        android:text="@string/car" />
+
+                    <RadioButton
+                        android:id="@+id/rb_motorcycle"
+                        style="@style/TextVertical.Caption"
+                        android:text="@string/motorcycle" />
+                    <RadioButton
+                        android:id="@+id/rb_house"
+                        style="@style/TextVertical.Caption"
+                        android:text="@string/house" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/ll_cm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="@color/colorGray4"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TextView
+                        android:id="@+id/txt_collateral_cm"
+                        style="@style/Text.Caption"
+                        android:textColor="@color/colorGreen1"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="5dp"
+                        tools:text="Car"
+                        android:textSize="15sp" />
+
+                    <Spinner
+                        android:id="@+id/sp_merk"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        style="@style/Text.Caption"/>
+                    <Spinner
+                        android:id="@+id/sp_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        style="@style/Text.Caption"/>
+                    <Spinner
+                        android:id="@+id/sp_manufacture_year"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        style="@style/Text.Caption" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:id="@+id/ll_stnk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <TextView
+                                android:id="@+id/txt_upload_stnk"
+                                style="@style/Text.Caption"
+                                android:gravity="center"
+                                android:layout_marginBottom="5dp"
+                                android:text="@string/upload_stnk" />
+
+                            <ImageView
+                                android:id="@+id/img_stnk"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:gravity="center"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_bpkb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/txt_upload_bpkb"
+                                style="@style/Text.Caption"
+                                android:gravity="center"
+                                android:layout_marginBottom="5dp"
+                                android:text="@string/upload_bpkb" />
+
+                            <ImageView
+                                android:id="@+id/img_bpkb"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:gravity="center"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_check_loan_cm"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:text="@string/check_loan"
+                        style="@style/Button.Neutral"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_house"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="@color/colorGray4"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TextView
+                        android:id="@+id/txt_collateral_house"
+                        style="@style/Text.Caption"
+                        android:textColor="@color/colorGreen1"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="5dp"
+                        tools:text="House"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:hint="@string/location"
+                        android:textSize="13sp"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:hint="@string/area_size_m2"
+                        android:inputType="numberDecimal"
+                        android:textSize="13sp"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_estimated_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:inputType="number"
+                        android:hint="@string/estimated_price_rp"
+                        android:textSize="13sp"/>
+
+                    <Spinner
+                        android:id="@+id/sp_house_owner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Text.Caption"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:id="@+id/ll_house_photo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <TextView
+                                android:id="@+id/txt_upload_house_photo"
+                                style="@style/Text.Caption"
+                                android:gravity="center"
+                                android:layout_marginBottom="5dp"
+                                android:text="@string/upload_house_photo" />
+
+                            <ImageView
+                                android:id="@+id/img_house"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:gravity="center"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_house_certificate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/txt_upload_house_certificate"
+                                style="@style/Text.Caption"
+                                android:gravity="center"
+                                android:layout_marginBottom="5dp"
+                                android:text="@string/upload_house_certificate" />
+
+                            <ImageView
+                                android:id="@+id/img_house_certificate"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:gravity="center"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_check_loan_house"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:text="@string/check_loan"
+                        style="@style/Button.Neutral"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            style="@style/Text.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/loan" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="10dp"
+            app:contentPadding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    style="@style/Text.Caption"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/loan_amount"
+                    android:textSize="15sp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_input_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="number"
+                    android:hint="@string/rp_1_000_000"
+                    android:textAlignment="center"
+                    android:textSize="13sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_min_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:text="@string/min_loan"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txt_max_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/max_loan"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    style="@style/Text.Caption"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/time_period"
+                    android:textSize="15sp" />
+
+                <SeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginBottom="5dp"
+                    android:progressTint="@color/colorGreen1"
+                    android:progressBackgroundTint="@color/colorBgGray"
+                    android:thumbTint="@color/colorGreen1"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_min_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:text="@string/min_time"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txt_max_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/max_time"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            style="@style/Text.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/calculation" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="10dp"
+            app:contentPadding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextHorizontal.Caption"
+                        android:text="@string/loan_amount" />
+
+                    <TextView
+                        android:id="@+id/txt_loan_amount"
+                        style="@style/TextHorizontal.Caption"
+                        android:gravity="end"
+                        tools:text="Rp 2.000.000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextHorizontal.Caption"
+                        android:text="@string/time_period" />
+
+                    <TextView
+                        android:id="@+id/txt_time_period"
+                        style="@style/TextHorizontal.Caption"
+                        android:gravity="end"
+                        tools:text="2 Months" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextHorizontal.Caption"
+                        android:text="@string/interest" />
+
+                    <TextView
+                        android:id="@+id/txt_interest"
+                        style="@style/TextHorizontal.Caption"
+                        android:gravity="end"
+                        tools:text="Rp 200.000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextHorizontal.Caption"
+                        android:text="@string/loan_total"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_total_loan"
+                        style="@style/TextHorizontal.Caption"
+                        android:gravity="end"
+                        android:textStyle="bold"
+                        tools:text="Rp 2.200.000" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorBgGreen"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/Text.Caption"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="@string/installment_per_month"
+                android:textColor="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/txt_installment"
+                style="@style/Text.Caption"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                tools:text="Rp. 183.400" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/txt_terms"
+                style="@style/TextHorizontal.Caption"
+                android:text="@string/terms_and_condition"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_apply"
+            style="@style/Button.Positive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/accept_and_apply_loan" />
+
+    </LinearLayout>
+
+</ScrollView>

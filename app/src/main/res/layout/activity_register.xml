@@ -35,7 +35,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_nik"
             android:hint="@string/nik_no_ktp"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGray4"
-    tools:context=".WithoutCollateral">
+    tools:context=".WithoutCollateralActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,9 +22,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_marginTop="8dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
             app:contentPadding="5dp">
 
             <LinearLayout
@@ -66,9 +66,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_marginTop="8dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
             app:contentPadding="5dp">
 
             <LinearLayout
@@ -107,7 +107,7 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/max_amount"
+                        android:id="@+id/txt_max_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
@@ -127,12 +127,13 @@
                     android:textSize="15sp" />
 
                 <SeekBar
+                    android:id="@+id/sb_time"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginBottom="5dp"
-                    android:progressTint="@color/colorGreen1"
                     android:progressBackgroundTint="@color/colorBgGray"
-                android:thumbTint="@color/colorGreen1"/>
+                    android:progressTint="@color/colorGreen1"
+                    android:thumbTint="@color/colorGreen1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -173,9 +174,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_marginTop="8dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
             app:contentPadding="5dp">
 
             <LinearLayout
@@ -246,8 +247,8 @@
                         android:id="@+id/txt_total_loan"
                         style="@style/TextHorizontal.Caption"
                         android:gravity="end"
-                        android:textStyle="bold"
-                        tools:text="Rp 2.200.000" />
+                        tools:text="Rp 2.200.000"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -287,12 +288,12 @@
             <CheckBox
                 android:id="@+id/cb_terms"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/txt_terms"
                 style="@style/TextHorizontal.Caption"
-                android:text="@string/terms_and_condition"/>
+                android:text="@string/terms_and_condition" />
         </LinearLayout>
 
         <Button
@@ -301,6 +302,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/accept_and_apply_loan" />
 
     </LinearLayout>
