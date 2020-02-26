@@ -40,6 +40,6 @@ public class WithoutCollateralActivity extends AppCompatActivity {
         tvInstallment = findViewById(R.id.txt_installment);
         cbTerms = findViewById(R.id.cb_terms);
         btnApply = findViewById(R.id.btn_apply);
-        
+
     }
 }
