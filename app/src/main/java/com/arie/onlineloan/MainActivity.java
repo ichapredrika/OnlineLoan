@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         btnWithoutCollateral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WithoutCollateralActivity.class);
+                Intent intent = new Intent(MainActivity.this, NonCollateralActivity.class);
                 startActivity(intent);
             }
         });
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         btnWithCollateral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WithCollateralActivity.class);
+                Intent intent = new Intent(MainActivity.this, CollateralActivity.class);
                 startActivity(intent);
             }
         });

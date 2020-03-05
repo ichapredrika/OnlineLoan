@@ -5,11 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class WithoutCollateralActivity extends AppCompatActivity {
+public class NonCollateralActivity extends AppCompatActivity {
 
     private TextView tvName, tvNik, tvDetail;
     private TextView tvLoanInput;
@@ -22,7 +21,7 @@ public class WithoutCollateralActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_without_collateral);
+        setContentView(R.layout.activity_non_collateral);
 
         tvName = findViewById(R.id.txt_name);
         tvNik = findViewById(R.id.txt_nik);

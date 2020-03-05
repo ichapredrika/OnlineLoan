@@ -21,6 +21,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.arie.onlineloan.models.User;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -123,16 +127,27 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, response);
-                Toast.makeText(RegisterActivity.this, response, Toast.LENGTH_LONG).show();
-                if (!response.equals("Email Address Already Used")) {
-                    Intent in = new Intent(RegisterActivity.this, LoginActivity.class);
-                    startActivity(in);
+                try {
+                    JSONObject jsonPost = new JSONObject(response);
+                    JSONArray dataArray = jsonPost.getJSONArray("result");
+                    JSONObject dataObject = dataArray.getJSONObject(0);
+                    String castMessage = dataObject.getString("MESSAGE");
+                    String castStatus = dataObject.getString("STATUS");
+
+                    Toast.makeText(RegisterActivity.this, castMessage, Toast.LENGTH_LONG).show();
+
+                    if (castStatus.equals("1")) {
+                        Intent in = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(in);
+                        //todo differentiate session (admin and user)
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(RegisterActivity.this, getString(R.string.msg_something_wrong), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
                 Toast.makeText(RegisterActivity.this, getString(R.string.msg_connection_error), Toast.LENGTH_SHORT).show();
             }
         }) {

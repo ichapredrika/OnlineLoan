@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGray4"
-    tools:context=".WithCollateralActivity">
+    tools:context=".CollateralActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

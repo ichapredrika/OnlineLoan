@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -16,9 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class WithCollateralActivity extends AppCompatActivity {
+public class CollateralActivity extends AppCompatActivity {
 
     private LinearLayout llCm,llStnk, llBpkb;
     private LinearLayout llHouse, llHousePhoto, llHouseCertificate;
@@ -49,7 +47,7 @@ public class WithCollateralActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_with_collateral);
+        setContentView(R.layout.activity_collateral);
 
         llCm = findViewById(R.id.ll_cm);
         llStnk = findViewById(R.id.ll_stnk);

@@ -13,9 +13,10 @@
     <string name="welcome">Hai, %1$s !\nSelamat Datang di Online Loan!</string>
     <string name="msg_load_error">Failed to load data!</string>
     <string name="msg_connection_error">Failed to connect to server!</string>
+    <string name="msg_something_wrong">Something is wrong!</string>
     <string name="nik_no_ktp">NIK (No KTP)</string>
-    <string name="loan_with_collateral">Loan with Collateral</string>
-    <string name="loan_without_collateral">Loan without Collateral</string>
+    <string name="loan_with_collateral">Collateral Loan</string>
+    <string name="loan_without_collateral">NonCollateral Loan</string>
     <string name="profile">Profile</string>
     <string name="borrower_data">Borrower Data</string>
     <string name="see_detail">See Detail…</string>
