@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainCustomerActivity">
+    tools:context=".MainAdminActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,69 +67,6 @@
                 app:contentPadding="8dp">
 
                 <LinearLayout
-                    android:id="@+id/ll_collateral"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/ic_collateral" />
-
-                    <TextView
-                        android:id="@+id/txt_collateral"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/loan_with_collateral"
-                        android:textColor="@color/colorGreen1" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="10dp"
-                app:contentPadding="8dp">
-
-                <LinearLayout
-                    android:id="@+id/ll_non_collateral"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/ic_non_collateral" />
-
-                    <TextView
-                        android:id="@+id/txt_non_collateral"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/loan_without_collateral"
-                        android:textColor="@color/colorGreen1" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="10dp"
-                app:contentPadding="8dp">
-
-                <LinearLayout
                     android:id="@+id/ll_transaction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -148,6 +85,37 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/transaction"
+                        android:textColor="@color/colorGreen1" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="8dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_report"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_report" />
+
+                    <TextView
+                        android:id="@+id/txt_report"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/report"
                         android:textColor="@color/colorGreen1" />
 
                 </LinearLayout>
@@ -185,5 +153,4 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
     </LinearLayout>
-
 </ScrollView>

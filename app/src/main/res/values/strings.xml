@@ -16,7 +16,7 @@
     <string name="msg_something_wrong">Something is wrong!</string>
     <string name="nik_no_ktp">NIK (No KTP)</string>
     <string name="loan_with_collateral">Collateral Loan</string>
-    <string name="loan_without_collateral">NonCollateral Loan</string>
+    <string name="loan_without_collateral">Non Collateral Loan</string>
     <string name="profile">Profile</string>
     <string name="borrower_data">Borrower Data</string>
     <string name="see_detail">See Detail…</string>
@@ -47,4 +47,6 @@
     <string name="upload_house_photo">Upload House Photo</string>
     <string name="upload_house_certificate">Upload House Certificate</string>
     <string name="check_loan">Check Loan</string>
+    <string name="transaction">Transaction</string>
+    <string name="report">Report</string>
 </resources>

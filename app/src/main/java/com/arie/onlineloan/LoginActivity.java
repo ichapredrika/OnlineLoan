@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (response.equals("1")) {
                         saveUser(userId, userPass, userName, userEmail, userAddress, userPhone, userNik);
-                        Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intentMain = new Intent(LoginActivity.this, MainCustomerActivity.class);
                         startActivity(intentMain);
                         Toast.makeText(LoginActivity.this, "Welcome, " + userName + " !", Toast.LENGTH_SHORT).show();
                     }
