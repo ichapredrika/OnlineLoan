@@ -11,10 +11,12 @@ public class User implements Parcelable {
     private String phone;
     private String email;
     private String address;
+    private String role;
 
     public User() {
 
     }
+
 
     public String getUserId() {
         return userId;
@@ -72,7 +74,15 @@ public class User implements Parcelable {
         this.address = address;
     }
 
-    public User(String userId, String password, String fullname, String nik, String phone, String email, String address) {
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public User(String userId, String password, String fullname, String nik, String phone, String email, String address, String role) {
         this.userId = userId;
         this.password = password;
         this.fullname = fullname;
@@ -80,6 +90,7 @@ public class User implements Parcelable {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
     }
 
     @Override
@@ -96,6 +107,7 @@ public class User implements Parcelable {
         dest.writeString(this.phone);
         dest.writeString(this.email);
         dest.writeString(this.address);
+        dest.writeString(this.role);
     }
 
     protected User(Parcel in) {
@@ -106,6 +118,7 @@ public class User implements Parcelable {
         this.phone = in.readString();
         this.email = in.readString();
         this.address = in.readString();
+        this.role = in.readString();
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {

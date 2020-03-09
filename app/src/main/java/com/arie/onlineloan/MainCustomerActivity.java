@@ -62,5 +62,21 @@ public class MainCustomerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        llTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inTrans = new Intent(MainCustomerActivity.this, TransactionActivity.class);
+                startActivity(inTrans);
+            }
+        });
+
+        llProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inProfile = new Intent(MainCustomerActivity.this, ProfileActivity.class);
+                startActivity(inProfile);
+            }
+        });
     }
 }

@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainAdminActivity"></activity>
+        <activity android:name=".ReportActivity"></activity>
+        <activity android:name=".TransactionDetailActivity" />
+        <activity android:name=".TransactionActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".MainAdminActivity" />
         <activity android:name=".CollateralActivity" />
         <activity android:name=".NonCollateralActivity" />
         <activity android:name=".LoginActivity">

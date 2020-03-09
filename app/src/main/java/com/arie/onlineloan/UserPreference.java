@@ -33,8 +33,7 @@ public class UserPreference {
         editor.putString(USER_EMAIL, value.getEmail());
         editor.putString(USER_ADDRESS, value.getAddress());
         editor.putString(USER_PHONE, value.getPhone());
-       /* editor.putString(USER_ROLE, value.getUserRole());
-        */
+        editor.putString(USER_ROLE, value.getRole());
 
         editor.apply();
     }
@@ -48,8 +47,7 @@ public class UserPreference {
         model.setEmail(preferences.getString(USER_EMAIL, ""));
         model.setAddress(preferences.getString(USER_ADDRESS, ""));
         model.setPhone(preferences.getString(USER_PHONE, ""));
-      /*  model.setUserRole(preferences.getString(USER_ROLE, ""));
-       */
+        model.setRole(preferences.getString(USER_ROLE, ""));
 
         return model;
     }

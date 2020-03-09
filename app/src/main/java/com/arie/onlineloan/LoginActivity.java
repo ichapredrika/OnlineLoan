@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                     String userPass = jo.getString("PASSWORD");
                     String userPhone = jo.getString("PHONE");
                     String userAddress = jo.getString("ADDRESS");
-                    //String userRole = jo.getString("ROLE");
+                    String userRole = jo.getString("ROLE");
                     String message = jo.getString("message");
 
                     loading.dismiss();
@@ -121,9 +121,15 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     if (response.equals("1")) {
-                        saveUser(userId, userPass, userName, userEmail, userAddress, userPhone, userNik);
-                        Intent intentMain = new Intent(LoginActivity.this, MainCustomerActivity.class);
-                        startActivity(intentMain);
+                        saveUser(userId, userPass, userName, userEmail, userAddress, userPhone, userNik, userRole);
+                        if(userRole.equals("ADMIN")){
+                            Intent intentAdmin = new Intent(LoginActivity.this, MainAdminActivity.class);
+                            startActivity(intentAdmin);
+                        }else{
+                            Intent intentCustomer = new Intent(LoginActivity.this, MainCustomerActivity.class);
+                            startActivity(intentCustomer);
+                        }
+
                         Toast.makeText(LoginActivity.this, "Welcome, " + userName + " !", Toast.LENGTH_SHORT).show();
                     }
 
@@ -153,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void saveUser(String userId, String userPassword, String userFullname, String userEmail,
-                  String userAddress, String userPhone, String userNik) {
+                  String userAddress, String userPhone, String userNik, String userRole) {
         UserPreference userPreference = new UserPreference(this);
         userModel.setUserId(userId);
         userModel.setPassword(userPassword);
@@ -162,7 +168,7 @@ public class LoginActivity extends AppCompatActivity {
         userModel.setEmail(userEmail);
         userModel.setPhone(userPhone);
         userModel.setAddress(userAddress);
-        //userModel.setUserRole(userRole);
+        userModel.setRole(userRole);
 
         userPreference.setUser(userModel);
     }
