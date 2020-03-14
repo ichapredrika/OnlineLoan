@@ -192,7 +192,7 @@ public class NonCollateralActivity extends AppCompatActivity {
                 }else if(!cbTerms.isChecked()){
                     Toast.makeText(NonCollateralActivity.this, getString(R.string.msg_check_terms), Toast.LENGTH_SHORT).show();
                 }else{
-                    //apply loan
+                    applyNonCollateral();
                 }
             }
         });
@@ -259,6 +259,77 @@ public class NonCollateralActivity extends AppCompatActivity {
             protected java.util.Map<String, String> getParams() {
                 java.util.Map<String, String> params = new HashMap<>();
                 params.put("USER_ID", user.getUserId());
+                return params;
+            }
+        };
+        mRequestQueue.add(mStringRequest);
+    }
+
+    private void applyNonCollateral() {
+        loading = ProgressDialog.show(NonCollateralActivity.this, "Loading Data...", "Please Wait...", false, false);
+        RequestQueue mRequestQueue = Volley.newRequestQueue(NonCollateralActivity.this);
+
+        StringRequest mStringRequest = new StringRequest(Request.Method.POST, phpConf.URL_CHECK_NON_COLLATERAL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                try {
+                    Log.d("Json checkNonCollateral", s);
+                    JSONObject jsonObject = new JSONObject(s);
+                    JSONArray data = jsonObject.getJSONArray("result");
+
+                    JSONObject jo = data.getJSONObject(0);
+
+                    Log.d("tagJsonObject", jo.toString());
+                    String response = jo.getString("response");
+
+                    if (response.equals("1")) {
+                        minLoanAmount = jo.getString("MIN_LOAN_AMOUNT");
+                        maxLoanAmount = jo.getString("MAX_LOAN_AMOUNT");
+                        minLoanTime = jo.getString("MIN_LOAN_TIME");
+                        maxLoanTime = jo.getString("MAX_LOAN_TIME");
+                        String interest = jo.getString("INTEREST");
+
+                        interestDouble = Double.parseDouble(interest);
+                        minLoanAmountInt = Integer.parseInt(minLoanAmount);
+                        maxLoanAmountInt = Integer.parseInt(maxLoanAmount);
+                        minLoanTimeInt = Integer.parseInt(minLoanTime);
+                        maxLoanTimeInt = Integer.parseInt(maxLoanTime);
+
+                        tvMinAmount.setText(getString(R.string.min_loan_amount, df.format(minLoanAmountInt)));
+                        tvMaxAmount.setText(getString(R.string.max_loan_amount, df.format(maxLoanAmountInt)));
+                        tvMinTime.setText(getString(R.string.min_loan_time, minLoanTime));
+                        tvMaxTime.setText(getString(R.string.max_loan_time, maxLoanTime));
+                        sbAmount.setProgress(100);
+                        sbAmount.setProgress(100);
+
+                    } else {
+                        String message = jo.getString("message");
+                        Toast.makeText(NonCollateralActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    loading.dismiss();
+                    e.printStackTrace();
+                }
+                loading.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                Log.d("tag", String.valueOf(error));
+                Toast.makeText(NonCollateralActivity.this, getString(R.string.msg_connection_error), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected java.util.Map<String, String> getParams() {
+                java.util.Map<String, String> params = new HashMap<>();
+                params.put("USER_ID", user.getUserId());
+                params.put("LOAN_TYPE", user.getUserId());
+                params.put("LOAN_AMOUNT", user.getUserId());
+                params.put("TIME_PERIOD", user.getUserId());
+                params.put("INTEREST", user.getUserId());
+                params.put("ADDRESS", user.getUserId());
+                params.put("INSTALLMENT", user.getUserId());
                 return params;
             }
         };

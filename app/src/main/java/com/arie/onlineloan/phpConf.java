@@ -20,6 +20,7 @@ public class phpConf {
     public final static String URL_GET_MOTOR_MODEL = "https://"+ ip +"/onlineloan/get_motor_model.php";
     public final static String URL_GET_PROFILE = "https://"+ ip +"/onlineloan/get_user_profile.php";
     public final static String URL_UPDATE_PROFILE = "https://"+ ip +"/onlineloan/update_user_profile.php";
+    //
 
 
 
