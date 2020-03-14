@@ -106,14 +106,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     Log.d("tagJsonObject", jo.toString());
                     String response = jo.getString("response");
-                    String userId = jo.getString("ID");
-                    String userName = jo.getString("FULLNAME");
-                    String userNik = jo.getString("NIK");
-                    String userEmail = jo.getString("EMAIL");
-                    String userPass = jo.getString("PASSWORD");
-                    String userPhone = jo.getString("PHONE");
-                    String userAddress = jo.getString("ADDRESS");
-                    String userRole = jo.getString("ROLE");
                     String message = jo.getString("message");
 
                     loading.dismiss();
@@ -121,6 +113,14 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     if (response.equals("1")) {
+                        String userId = jo.getString("ID");
+                        String userName = jo.getString("FULLNAME");
+                        String userNik = jo.getString("NIK");
+                        String userEmail = jo.getString("EMAIL");
+                        String userPass = jo.getString("PASSWORD");
+                        String userPhone = jo.getString("PHONE");
+                        String userAddress = jo.getString("ADDRESS");
+                        String userRole = jo.getString("ROLE");
                         saveUser(userId, userPass, userName, userEmail, userAddress, userPhone, userNik, userRole);
                         if(userRole.equals("ADMIN")){
                             Intent intentAdmin = new Intent(LoginActivity.this, MainAdminActivity.class);

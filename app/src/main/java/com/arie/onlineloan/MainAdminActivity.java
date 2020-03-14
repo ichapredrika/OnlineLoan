@@ -29,6 +29,7 @@ public class MainAdminActivity extends AppCompatActivity {
         LinearLayout llReport = findViewById(R.id.ll_report);
         LinearLayout llTransaction = findViewById(R.id.ll_transaction);
         LinearLayout llProfile = findViewById(R.id.ll_profile);
+        LinearLayout llApproval = findViewById(R.id.ll_approval);
 
         String welcome = getString(R.string.welcome, userModel.getFullname());
         tvWelcome.setText(welcome);
@@ -63,6 +64,14 @@ public class MainAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent inProfile = new Intent(MainAdminActivity.this, TransactionActivity.class);
+                startActivity(inProfile);
+            }
+        });
+
+        llApproval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inProfile = new Intent(MainAdminActivity.this, ApprovalActivity.class);
                 startActivity(inProfile);
             }
         });

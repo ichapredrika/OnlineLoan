@@ -67,6 +67,37 @@
                 app:contentPadding="8dp">
 
                 <LinearLayout
+                    android:id="@+id/ll_approval"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_approve" />
+
+                    <TextView
+                        android:id="@+id/txt_approval"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/loan_approval"
+                        android:textColor="@color/colorGreen1" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="8dp">
+
+                <LinearLayout
                     android:id="@+id/ll_transaction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

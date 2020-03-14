@@ -125,18 +125,23 @@ public class RegisterActivity extends AppCompatActivity {
 
         StringRequest mStringRequest = new StringRequest(Request.Method.POST, phpConf.URL_REGISTER, new Response.Listener<String>() {
             @Override
-            public void onResponse(String response) {
-                Log.d(TAG, response);
+            public void onResponse(String s) {
+                Log.d(TAG, s);
                 try {
-                    JSONObject jsonPost = new JSONObject(response);
-                    JSONArray dataArray = jsonPost.getJSONArray("result");
-                    JSONObject dataObject = dataArray.getJSONObject(0);
-                    String castMessage = dataObject.getString("MESSAGE");
-                    String castStatus = dataObject.getString("STATUS");
+                    Log.d("Json register", s);
+                    JSONObject jsonObject = new JSONObject(s);
+                    JSONArray data = jsonObject.getJSONArray("result");
 
-                    Toast.makeText(RegisterActivity.this, castMessage, Toast.LENGTH_LONG).show();
+                    JSONObject jo = data.getJSONObject(0);
 
-                    if (castStatus.equals("1")) {
+                    Log.d("tagJsonObject", jo.toString());
+                    String response = jo.getString("STATUS");
+                    String message = jo.getString("message");
+
+
+                    Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
+
+                    if (response.equals("1")) {
                         Intent in = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(in);
                         //todo differentiate session (admin and user)

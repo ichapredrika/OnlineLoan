@@ -36,7 +36,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/border_edit_text"
         android:hint="@string/email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:paddingStart="20dp"
         android:paddingEnd="10dp"
         android:textSize="15sp" />
@@ -61,6 +61,15 @@
             android:paddingEnd="10dp"
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="10dp"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/btn_login"

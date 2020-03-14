@@ -1,13 +1,13 @@
 package com.arie.onlineloan;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.arie.onlineloan.models.User;
 
@@ -40,7 +40,7 @@ public class MainCustomerActivity extends AppCompatActivity {
         imgLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainCustomerActivity.this,LoginActivity.class);
+                Intent intent = new Intent(MainCustomerActivity.this, LoginActivity.class);
                 mUserPreference.logoutUser();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -79,4 +79,6 @@ public class MainCustomerActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

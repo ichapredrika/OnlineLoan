@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="12dp"
+                android:padding="8dp"
                 android:visibility="visible">
 
                 <LinearLayout
@@ -181,7 +181,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="12dp"
+                android:padding="8dp"
                 android:visibility="gone">
 
                 <LinearLayout
@@ -202,47 +202,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/colorTextBrown"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
-                        android:text="@string/nik_no_ktp"/>
-
-                    <EditText
-                        android:id="@+id/txt_nik_edit"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/colorTextBrown" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
-                        android:text="@string/date_of_birth"/>
-
-                    <EditText
-                        android:id="@+id/txt_dob_edit"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/colorTextBrown" />
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -262,7 +222,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textColor="@color/colorTextBrown" />
+                        android:textColor="@color/colorTextBrown"
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -282,7 +243,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textColor="@color/colorTextBrown" />
+                        android:inputType="number"
+                        android:textColor="@color/colorTextBrown"
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -302,7 +265,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textColor="@color/colorTextBrown" />
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/colorTextBrown"
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <Button
@@ -335,7 +300,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

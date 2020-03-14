@@ -12,6 +12,10 @@
     <string name="msg_load_error">Failed to load data!</string>
     <string name="msg_connection_error">Failed to connect to server!</string>
     <string name="msg_something_wrong">Something is wrong!</string>
+    <string name="msg_between_min_max">Please input between minimal and maximal amount!</string>
+    <string name="msg_amount_between_min_max">Please input amount between minimal and maximal amount!</string>
+    <string name="msg_time_between_min_max">Please input time between minimal and maximal amount!</string>
+    <string name="msg_check_terms">Please agree to the terms and condition!</string>
     <string name="nik_no_ktp">NIK (No KTP)</string>
     <string name="loan_with_collateral">Collateral Loan</string>
     <string name="loan_without_collateral">Non Collateral Loan</string>
@@ -57,4 +61,16 @@
     <string name="institution">Institution</string>
     <string name="salary">Salary</string>
     <string name="save_profile">Save Profile</string>
+    <string name="id">Id</string>
+    <string name="type">Type</string>
+    <string name="status">Status</string>
+    <string name="installment">Installment</string>
+    <string name="loan_approval">Loan Approval</string>
+
+    <string name="min_loan_time">Min %1$s Months</string>
+    <string name="max_loan_time">Max %1$s Months</string>
+    <string name="min_loan_amount">Min Rp. %1$s</string>
+    <string name="max_loan_amount">Max Rp. %1$s</string>
+    <string name="con_month">%1$d Months</string>
+    <string name="con_amount">Rp %1$s</string>
 </resources>

@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ReportActivity"></activity>
+        <activity android:name=".ApprovalActivity"></activity>
+        <activity android:name=".ReportActivity" />
         <activity android:name=".TransactionDetailActivity" />
         <activity android:name=".TransactionActivity" />
         <activity android:name=".ProfileActivity" />
