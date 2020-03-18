@@ -36,7 +36,6 @@ import java.util.HashMap;
 public class NonCollateralActivity extends AppCompatActivity {
     ProgressDialog loading;
     private TextView tvName, tvNik, tvDetail;
-    private TextInputEditText tvLoanInput;
     private SeekBar sbTime, sbAmount;
     private TextView tvMinAmount, tvMaxAmount, tvMinTime, tvMaxTime, tvTimePeriodEdit, tvAmountEdit;
     private TextView tvLoanAmount, tvTimePeriod, tvInterest, tvTotalLoan;
@@ -47,7 +46,6 @@ public class NonCollateralActivity extends AppCompatActivity {
     private String maxLoanAmount;
     private String minLoanTime;
     private String maxLoanTime;
-
 
     private int loanAmount;
     private int loanInterest;
@@ -104,10 +102,10 @@ public class NonCollateralActivity extends AppCompatActivity {
             }
         });
 
+
        /* tvLoanInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -131,7 +129,6 @@ public class NonCollateralActivity extends AppCompatActivity {
                         tvLoanInput.setError(getString(R.string.msg_between_min_max));
                     }
                 }
-
             }
         });*/
 
