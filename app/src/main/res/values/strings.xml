@@ -84,6 +84,6 @@
     <string name="reject">Reject</string>
     <string name="approve">Approve</string>
     <string name="payment">Payment</string>
-    <string name="pembayaran_cicilan_ke">Pembayaran cicilan ke:</string>
+    <string name="pembayaran_cicilan_ke">Pay the loan to:</string>
     <string name="_563343656235575642">563343656235575642</string>
 </resources>
