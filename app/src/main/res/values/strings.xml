@@ -64,7 +64,6 @@
     <string name="type">Type</string>
     <string name="status">Status</string>
     <string name="loan_approval">Loan Approval</string>
-
     <string name="min_loan_time">Min %1$s Months</string>
     <string name="max_loan_time">Max %1$s Months</string>
     <string name="min_loan_amount">Min Rp. %1$s</string>
@@ -81,6 +80,10 @@
     <string name="brand">Brand</string>
     <string name="manufacture_year">Manufacture Year</string>
     <string name="stnk">STNK</string>
-    <string name="bpkbp">BPKBP</string>
     <string name="bpkb">BPKB</string>
+    <string name="reject">Reject</string>
+    <string name="approve">Approve</string>
+    <string name="payment">Payment</string>
+    <string name="pembayaran_cicilan_ke">Pembayaran cicilan ke:</string>
+    <string name="_563343656235575642">563343656235575642</string>
 </resources>

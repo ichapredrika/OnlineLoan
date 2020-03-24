@@ -131,16 +131,35 @@
                         tools:text="Car"
                         android:textSize="15sp" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/brand"/>
+
                     <Spinner
                         android:id="@+id/sp_merk"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         style="@style/Text.Caption"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/model"/>
+
                     <Spinner
                         android:id="@+id/sp_type"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         style="@style/Text.Caption"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/manufacture_year"/>
+
                     <Spinner
                         android:id="@+id/sp_manufacture_year"
                         android:layout_width="match_parent"
@@ -150,7 +169,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="12dp"
                         android:orientation="horizontal">
                         <LinearLayout
                             android:id="@+id/ll_stnk"
@@ -171,7 +190,8 @@
                                 android:id="@+id/img_stnk"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:gravity="center"/>
+                                android:gravity="center"
+                                android:src="@drawable/ic_upload_image"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -193,7 +213,8 @@
                                 android:id="@+id/img_bpkb"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:gravity="center"/>
+                                android:gravity="center"
+                                android:src="@drawable/ic_upload_image"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -201,6 +222,7 @@
                         android:id="@+id/btn_check_loan_cm"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
+                        android:layout_marginTop="16dp"
                         android:text="@string/check_loan"
                         style="@style/Button.Neutral"/>
 
@@ -212,8 +234,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginTop="10dp"
-                    android:padding="5dp"
-                    android:visibility="gone">
+                    android:padding="5dp">
 
                     <View
                         android:layout_width="match_parent"
@@ -263,7 +284,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="12dp"
                         android:orientation="horizontal">
                         <LinearLayout
                             android:id="@+id/ll_house_photo"
@@ -284,7 +305,8 @@
                                 android:id="@+id/img_house"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:gravity="center"/>
+                                android:gravity="center"
+                                android:src="@drawable/ic_upload_image"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -306,7 +328,8 @@
                                 android:id="@+id/img_house_certificate"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:gravity="center"/>
+                                android:gravity="center"
+                                android:src="@drawable/ic_upload_image"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -314,6 +337,7 @@
                         android:id="@+id/btn_check_loan_house"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
+                        android:layout_marginTop="16dp"
                         android:text="@string/check_loan"
                         style="@style/Button.Neutral"/>
 

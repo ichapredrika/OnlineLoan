@@ -30,8 +30,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class NonCollateralActivity extends AppCompatActivity {
     ProgressDialog loading;
@@ -46,6 +49,7 @@ public class NonCollateralActivity extends AppCompatActivity {
     private String maxLoanAmount;
     private String minLoanTime;
     private String maxLoanTime;
+    private String transId, transHeader;
 
     private int loanAmount;
     private int loanInterest;
@@ -101,36 +105,6 @@ public class NonCollateralActivity extends AppCompatActivity {
                 startActivity(inProfile);
             }
         });
-
-
-       /* tvLoanInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().equals("") || s.toString().length()!=0){
-                    int amount = Integer.parseInt(s.toString());
-                    Toast.makeText(NonCollateralActivity.this, s,Toast.LENGTH_SHORT).show();
-                    tvLoanAmount.setText(getString(R.string.con_amount, df.format(amount)));
-                    loanAmount = amount;
-                    if (!tvTimePeriodEdit.getText().toString().isEmpty()){
-                        int interestInt = loanAmount * loanTime;
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("") || s.toString().length()!=0){
-                    int amount = Integer.parseInt(s.toString());
-                    if (amount<minLoanAmountInt && amount>maxLoanAmountInt){
-                        tvLoanInput.setError(getString(R.string.msg_between_min_max));
-                    }
-                }
-            }
-        });*/
 
         sbAmount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -266,11 +240,11 @@ public class NonCollateralActivity extends AppCompatActivity {
         loading = ProgressDialog.show(NonCollateralActivity.this, "Loading Data...", "Please Wait...", false, false);
         RequestQueue mRequestQueue = Volley.newRequestQueue(NonCollateralActivity.this);
 
-        StringRequest mStringRequest = new StringRequest(Request.Method.POST, phpConf.URL_CHECK_NON_COLLATERAL, new Response.Listener<String>() {
+        StringRequest mStringRequest = new StringRequest(Request.Method.POST, phpConf.URL_APPLY_NON_COLLATERAL, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 try {
-                    Log.d("Json checkNonCollateral", s);
+                    Log.d("Json applyNonCollateral", s);
                     JSONObject jsonObject = new JSONObject(s);
                     JSONArray data = jsonObject.getJSONArray("result");
 
@@ -278,30 +252,16 @@ public class NonCollateralActivity extends AppCompatActivity {
 
                     Log.d("tagJsonObject", jo.toString());
                     String response = jo.getString("response");
+                    String message = jo.getString("message");
+                    Toast.makeText(NonCollateralActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     if (response.equals("1")) {
-                        minLoanAmount = jo.getString("MIN_LOAN_AMOUNT");
-                        maxLoanAmount = jo.getString("MAX_LOAN_AMOUNT");
-                        minLoanTime = jo.getString("MIN_LOAN_TIME");
-                        maxLoanTime = jo.getString("MAX_LOAN_TIME");
-                        String interest = jo.getString("INTEREST");
-
-                        interestDouble = Double.parseDouble(interest);
-                        minLoanAmountInt = Integer.parseInt(minLoanAmount);
-                        maxLoanAmountInt = Integer.parseInt(maxLoanAmount);
-                        minLoanTimeInt = Integer.parseInt(minLoanTime);
-                        maxLoanTimeInt = Integer.parseInt(maxLoanTime);
-
-                        tvMinAmount.setText(getString(R.string.min_loan_amount, df.format(minLoanAmountInt)));
-                        tvMaxAmount.setText(getString(R.string.max_loan_amount, df.format(maxLoanAmountInt)));
-                        tvMinTime.setText(getString(R.string.min_loan_time, minLoanTime));
-                        tvMaxTime.setText(getString(R.string.max_loan_time, maxLoanTime));
-                        sbAmount.setProgress(100);
-                        sbAmount.setProgress(100);
-
-                    } else {
-                        String message = jo.getString("message");
-                        Toast.makeText(NonCollateralActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Intent inTransDetail = new Intent(NonCollateralActivity.this, TransactionDetailActivity.class);
+                        inTransDetail.putExtra("transId", transId);
+                        inTransDetail.putExtra("origin", "apply");
+                        inTransDetail.putExtra("transType","Non Collateral" );
+                        startActivity(inTransDetail);
+                        finish();
                     }
                 } catch (JSONException e) {
                     loading.dismiss();
@@ -320,13 +280,27 @@ public class NonCollateralActivity extends AppCompatActivity {
             @Override
             protected java.util.Map<String, String> getParams() {
                 java.util.Map<String, String> params = new HashMap<>();
+
+                Date date= new Date();
+                long time = date.getTime();
+                Timestamp ts = new Timestamp(time);
+                String timestamp = ts.toString().replace(" ","-");
+                timestamp = timestamp.replace(":","");
+                transId = user.getUserId()+"-"+timestamp;
+                Log.d("transId", transId);
+
+                UUID uuid = UUID.randomUUID();
+                transHeader = uuid.toString().replace("-","").toUpperCase();
+
+                params.put("TRX_ID", transId);
+                params.put("UUID_HEADER", transHeader);
                 params.put("USER_ID", user.getUserId());
-                params.put("LOAN_TYPE", user.getUserId());
-                params.put("LOAN_AMOUNT", user.getUserId());
-                params.put("TIME_PERIOD", user.getUserId());
-                params.put("INTEREST", user.getUserId());
-                params.put("ADDRESS", user.getUserId());
-                params.put("INSTALLMENT", user.getUserId());
+                params.put("LOAN_TYPE", "Non Collateral");
+                params.put("LOAN_AMOUNT", Integer.toString(loanAmount));
+                params.put("TIME_PERIOD", Integer.toString(loanTime));
+                params.put("INTEREST", Integer.toString(loanInterest));
+                params.put("INSTALLMENT", Integer.toString(loanInstallment));
+                params.put("LOAN_TOTAL", Integer.toString(loanTotal));
                 return params;
             }
         };
