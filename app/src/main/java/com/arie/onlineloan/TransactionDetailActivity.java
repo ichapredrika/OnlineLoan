@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class TransactionDetailActivity extends AppCompatActivity {
@@ -41,6 +42,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private LinearLayout llApproval;
     private Button btnReject, btnApprove;
 
+    private TextView tvCollateral;
     private TextView tvName, tvNik, tvAccountNumber;
     private TextView tvLoanAmount, tvTimePeriod, tvInstallment, tvStatus, tvLoanTotal;
 
@@ -53,6 +55,14 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private ImageView imgStnk, imgBpkb;
 
     private CardView cvPayment;
+
+    private DecimalFormat df = new DecimalFormat("#,###");
+
+    private int loanAmount;
+    private int loanInterest;
+    private int loanTime;
+    private int loanInstallment;
+    private int loanTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +78,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
         btnApprove = findViewById(R.id.btn_approve);
         btnReject = findViewById(R.id.btn_reject);
 
+        tvCollateral = findViewById(R.id.txt_collateral);
         tvName = findViewById(R.id.txt_name);
         tvNik = findViewById(R.id.txt_nik);
         tvAccountNumber = findViewById(R.id.txt_account_number);
@@ -130,23 +141,29 @@ public class TransactionDetailActivity extends AppCompatActivity {
                         String nik = jo.getString("NIK");
                         String bankUserId = jo.getString("BANK_USER_ID");
                         String loanType = jo.getString("LOAN_TYPE");
-                        String loanAmount = jo.getString("LOAN_AMOUNT");
-                        String timePeriod = jo.getString("TIME_PERIOD");
-                        String loanTotal = jo.getString("LOAN_TOTAL");
-                        String installment = jo.getString("INSTALLMENT");
+                        String loanAmountStr = jo.getString("LOAN_AMOUNT");
+                        String timePeriodStr = jo.getString("PERIOD_TIME");
+                        String loanTotalStr = jo.getString("TOTAL_LOAN");
+                        String installmentStr = jo.getString("INSTALLMENT");
+
+                        loanAmount = Integer.parseInt(loanAmountStr);
+                        loanTime = Integer.parseInt(timePeriodStr);
+                        loanTotal = Integer.parseInt(loanTotalStr);
+                        loanInstallment = Integer.parseInt(installmentStr);
 
                         tvStatus.setText(status);
                         tvName.setText(fullname);
                         tvNik.setText(nik);
                         tvAccountNumber.setText(bankUserId);
-                        tvLoanAmount.setText(loanAmount);
-                        tvTimePeriod.setText(timePeriod);
-                        tvLoanTotal.setText(loanTotal);
-                        tvInstallment.setText(installment);
+                        tvLoanAmount.setText(getString(R.string.con_amount,df.format(loanAmount)));
+                        tvTimePeriod.setText(getString(R.string.con_month,loanTime));
+                        tvLoanTotal.setText(getString(R.string.con_amount,df.format(loanTotal)));
+                        tvInstallment.setText(getString(R.string.con_amount,df.format(loanInstallment)));
 
                         if(loanType.equals("Non Collateral")){
                             cvHouse.setVisibility(View.GONE);
                             cvVehicle.setVisibility(View.GONE);
+                            tvCollateral.setVisibility(View.GONE);
                         }else if(loanType.equals("Collateral Motorcycle") || loanType.equals("Collateral Car")){
                             cvHouse.setVisibility(View.GONE);
                             String vehicleType = jo.getString("VEHICLE_TYPE");

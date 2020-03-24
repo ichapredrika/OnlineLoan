@@ -1,7 +1,7 @@
 package com.arie.onlineloan;
 
 public class phpConf {
-    private final static String ip = "192.168.43.93";
+    private final static String ip = "192.168.0.112";
 
     public final static String URL_CONNECTION = "https://"+ ip +"/onlineloan/connection.php";
     public final static String URL_LOGIN = "https://"+ ip +"/onlineloan/login.php";

@@ -286,8 +286,9 @@ public class NonCollateralActivity extends AppCompatActivity {
                 Timestamp ts = new Timestamp(time);
                 String timestamp = ts.toString().replace(" ","-");
                 timestamp = timestamp.replace(":","");
-                transId = user.getUserId()+"-"+timestamp;
+                transId = user.getUserId().substring(0,3)+"-"+timestamp;
                 Log.d("transId", transId);
+
 
                 UUID uuid = UUID.randomUUID();
                 transHeader = uuid.toString().replace("-","").toUpperCase();

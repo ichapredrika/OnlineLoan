@@ -215,7 +215,7 @@
                         android:text="@string/installment" />
 
                     <TextView
-                        android:id="@+id/txt_interest"
+                        android:id="@+id/txt_installment"
                         style="@style/TextHorizontal.Caption"
                         android:gravity="end"
                         tools:text="Rp 200.000" />
@@ -242,6 +242,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/txt_collateral"
             style="@style/Text.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -436,6 +437,7 @@
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="30dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_mandiri"/>
 
                     <LinearLayout
