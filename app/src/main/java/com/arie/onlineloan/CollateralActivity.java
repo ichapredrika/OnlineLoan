@@ -944,7 +944,7 @@ public class CollateralActivity extends AppCompatActivity {
             } else if (imageType.equals(IMG_HP)) {
                 imgHousePhoto.setImageBitmap(photoBitmap);
                 BitmapHelper.getInstance().setBitmap(photoBitmap);
-                houseCertificateImage = getStringImage(photoBitmap);
+                houseImage = getStringImage(photoBitmap);
             }
         }
     }

@@ -78,7 +78,7 @@ public class MainCustomerActivity extends AppCompatActivity {
                 startActivity(inProfile);
             }
         });
-        
+
     }
 
 
