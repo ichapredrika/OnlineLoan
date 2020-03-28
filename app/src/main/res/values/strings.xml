@@ -12,6 +12,8 @@
     <string name="msg_load_error">Failed to load data!</string>
     <string name="msg_connection_error">Failed to connect to server!</string>
     <string name="msg_something_wrong">Something is wrong!</string>
+    <string name="msg_fill_all_field_loan">Input all fields to check the loan!</string>
+    <string name="msg_upload_document_loan">Upload documents to check the loan!</string>
     <string name="msg_between_min_max">Please input between minimal and maximal amount!</string>
     <string name="msg_amount_between_min_max">Please input amount between minimal and maximal amount!</string>
     <string name="msg_time_between_min_max">Please input time between minimal and maximal amount!</string>
@@ -86,4 +88,5 @@
     <string name="payment">Payment</string>
     <string name="pembayaran_cicilan_ke">Pay the loan to:</string>
     <string name="_563343656235575642">563343656235575642</string>
+    <string name="rp_15_000_000">Rp. 15.000.000</string>
 </resources>

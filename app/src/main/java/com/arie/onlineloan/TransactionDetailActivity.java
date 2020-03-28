@@ -2,7 +2,10 @@ package com.arie.onlineloan;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +36,11 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private static String ORIGIN_APPLY = "apply";
     private static String ORIGIN_USER = "list";
     private static String ORIGIN_ADMIN = "admin";
+    private static String COLLATERAL_CAR = "Collateral Car";
+    private static String COLLATERAL_MOTORCYCLE = "Collateral Motorcycle";
+    private static String COLLATERAL_HOUSE = "Collateral House";
+    private static String NON_COLLATERAL = "Non Collateral";
+
     private String transId;
     private String origin;
     private String transType;
@@ -63,6 +71,11 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private int loanTime;
     private int loanInstallment;
     private int loanTotal;
+
+    private Bitmap bmStnk;
+    private Bitmap bmBppkb;
+    private Bitmap bmHouseCertificate;
+    private Bitmap bmHousePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +126,17 @@ public class TransactionDetailActivity extends AppCompatActivity {
         } else if (origin.equals(ORIGIN_ADMIN)) {
             llApproval.setVisibility(View.VISIBLE);
             cvPayment.setVisibility(View.GONE);
+        }
+
+        if(transType.equals(NON_COLLATERAL)){
+            cvVehicle.setVisibility(View.GONE);
+            cvHouse.setVisibility(View.GONE);
+        }else if (transType.equals(COLLATERAL_CAR) || transType.equals(COLLATERAL_MOTORCYCLE)){
+            cvVehicle.setVisibility(View.VISIBLE);
+            cvHouse.setVisibility(View.GONE);
+        }else if (transType.equals(COLLATERAL_HOUSE)){
+            cvVehicle.setVisibility(View.GONE);
+            cvHouse.setVisibility(View.VISIBLE);
         }
 
         reqTransDetail();
@@ -173,10 +197,14 @@ public class TransactionDetailActivity extends AppCompatActivity {
                             String stnk = jo.getString("STNK");
                             String bpkb = jo.getString("BPKB");
 
+                            bmStnk = decodeBitmap(stnk);
+                            bmBppkb = decodeBitmap(bpkb);
+
                             tvBrand.setText(brand);
                             tvModel.setText(model);
                             tvManufactureYear.setText(manufactureYear);
-                            //todo set image for stnk bpkb
+                            imgBpkb.setImageBitmap(bmBppkb);
+                            imgStnk.setImageBitmap(bmStnk);
 
                         }else if(loanType.equals("Collateral House")){
                             cvVehicle.setVisibility(View.GONE);
@@ -186,10 +214,15 @@ public class TransactionDetailActivity extends AppCompatActivity {
                             String houseCertificate = jo.getString("HOUSE_CERTIFICATE");
                             String housePhoto = jo.getString("HOUSE_PHOTO");
 
+                            bmHousePhoto = decodeBitmap(housePhoto);
+                            bmHouseCertificate = decodeBitmap(houseCertificate);
+
+                            imgBpkb.setImageBitmap(bmBppkb);
+                            imgStnk.setImageBitmap(bmStnk);
+
                             tvLocation.setText(location);
                             tvAreaSize.setText(areaSize);
                             tvEstimatedPrice.setText(estimatedPrice);
-                            //todo set image for certificate and photo
                         }
 
                     } else {
@@ -222,5 +255,11 @@ public class TransactionDetailActivity extends AppCompatActivity {
             }
         };
         mRequestQueue.add(mStringRequest);
+    }
+
+    private Bitmap decodeBitmap(String encodedImage){
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedByte;
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -39,7 +40,7 @@ import java.util.UUID;
 public class NonCollateralActivity extends AppCompatActivity {
     ProgressDialog loading;
     private TextView tvName, tvNik, tvDetail;
-    private SeekBar sbTime, sbAmount;
+    private SeekBar sbTime;
     private TextView tvMinAmount, tvMaxAmount, tvMinTime, tvMaxTime, tvTimePeriodEdit, tvAmountEdit;
     private TextView tvLoanAmount, tvTimePeriod, tvInterest, tvTotalLoan;
     private TextView tvInstallment;
@@ -80,7 +81,7 @@ public class NonCollateralActivity extends AppCompatActivity {
         tvDetail = findViewById(R.id.txt_detail);
         //tvLoanInput = findViewById(R.id.txt_input_amount);
         sbTime = findViewById(R.id.sb_time);
-        sbAmount = findViewById(R.id.sb_amount);
+
         tvMinAmount = findViewById(R.id.txt_min_amount);
         tvMaxAmount = findViewById(R.id.txt_max_amount);
         tvMinTime = findViewById(R.id.txt_min_time);
@@ -106,38 +107,38 @@ public class NonCollateralActivity extends AppCompatActivity {
             }
         });
 
-        sbAmount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        tvAmountEdit.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                int result = (progress* maxLoanAmountInt)/100;
-                tvLoanAmount.setText(getString(R.string.con_amount,df.format(result)));
-                tvAmountEdit.setText(getString(R.string.con_amount,df.format(result)));
-                loanAmount=result;
-                if (loanAmount>0 && loanTime>0 ){
-                    calculateLoan();
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() != 0){
+                    int inputtedAmount = Integer.parseInt(s.toString().trim());
+
+                        loanAmount = inputtedAmount;
+                        String amount = getString(R.string.con_amount,df.format(loanAmount));
+                        tvLoanAmount.setText(amount);
+                        if(loanTime>0) calculateLoan();
                 }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
 
         sbTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                int result = (progress* maxLoanTimeInt)/100;
-                tvTimePeriod.setText(getString(R.string.con_month,result));
-                tvTimePeriodEdit.setText(getString(R.string.con_month,result));
+                int result = (progress * maxLoanTimeInt) / 100;
+                tvTimePeriod.setText(getString(R.string.con_month, result));
+                tvTimePeriodEdit.setText(getString(R.string.con_month, result));
                 loanTime = result;
 
-                if (loanAmount>0 && loanTime>0 ){
+                if (loanAmount > 0 && loanTime > 0) {
                     calculateLoan();
                 }
             }
@@ -156,13 +157,13 @@ public class NonCollateralActivity extends AppCompatActivity {
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (loanAmount<minLoanAmountInt || loanAmount>maxLoanAmountInt){
+                if (loanAmount < minLoanAmountInt || loanAmount > maxLoanAmountInt) {
                     Toast.makeText(NonCollateralActivity.this, getString(R.string.msg_amount_between_min_max), Toast.LENGTH_SHORT).show();
-                }else if (loanTime<minLoanTimeInt || loanTime>maxLoanTimeInt){
+                } else if (loanTime < minLoanTimeInt || loanTime > maxLoanTimeInt) {
                     Toast.makeText(NonCollateralActivity.this, getString(R.string.msg_time_between_min_max), Toast.LENGTH_SHORT).show();
-                }else if(!cbTerms.isChecked()){
+                } else if (!cbTerms.isChecked()) {
                     Toast.makeText(NonCollateralActivity.this, getString(R.string.msg_check_terms), Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     applyNonCollateral();
                 }
             }
@@ -201,12 +202,13 @@ public class NonCollateralActivity extends AppCompatActivity {
                         minLoanTimeInt = Integer.parseInt(minLoanTime);
                         maxLoanTimeInt = Integer.parseInt(maxLoanTime);
 
+                        int counter = maxLoanAmount.length();
+                        tvAmountEdit.setFilters(new InputFilter[] {new InputFilter.LengthFilter(counter)});
                         tvMinAmount.setText(getString(R.string.min_loan_amount, df.format(minLoanAmountInt)));
                         tvMaxAmount.setText(getString(R.string.max_loan_amount, df.format(maxLoanAmountInt)));
                         tvMinTime.setText(getString(R.string.min_loan_time, minLoanTime));
                         tvMaxTime.setText(getString(R.string.max_loan_time, maxLoanTime));
-                        sbAmount.setProgress(100);
-                        sbAmount.setProgress(100);
+
 
                     } else {
                         String message = jo.getString("message");
@@ -259,7 +261,7 @@ public class NonCollateralActivity extends AppCompatActivity {
                         Intent inTransDetail = new Intent(NonCollateralActivity.this, TransactionDetailActivity.class);
                         inTransDetail.putExtra("transId", transId);
                         inTransDetail.putExtra("origin", "apply");
-                        inTransDetail.putExtra("transType","Non Collateral" );
+                        inTransDetail.putExtra("transType", "Non Collateral");
                         startActivity(inTransDetail);
                         finish();
                     }
@@ -281,17 +283,17 @@ public class NonCollateralActivity extends AppCompatActivity {
             protected java.util.Map<String, String> getParams() {
                 java.util.Map<String, String> params = new HashMap<>();
 
-                Date date= new Date();
+                Date date = new Date();
                 long time = date.getTime();
                 Timestamp ts = new Timestamp(time);
-                String timestamp = ts.toString().replace(" ","-");
-                timestamp = timestamp.replace(":","");
-                transId = user.getUserId().substring(0,3)+"-"+timestamp;
+                String timestamp = ts.toString().replace(" ", "-");
+                timestamp = timestamp.replace(":", "");
+                transId = user.getUserId().substring(0, 3) + "-" + timestamp;
                 Log.d("transId", transId);
 
 
                 UUID uuid = UUID.randomUUID();
-                transHeader = uuid.toString().replace("-","").toUpperCase();
+                transHeader = uuid.toString().replace("-", "").toUpperCase();
 
                 params.put("TRX_ID", transId);
                 params.put("UUID_HEADER", transHeader);
@@ -308,11 +310,11 @@ public class NonCollateralActivity extends AppCompatActivity {
         mRequestQueue.add(mStringRequest);
     }
 
-    private void calculateLoan(){
-        double interest = interestDouble* loanTime*loanAmount;
+    private void calculateLoan() {
+        double interest = interestDouble * loanTime * loanAmount;
         loanInterest = (int) interest;
-        loanTotal = loanAmount+ loanInterest;
-        loanInstallment = loanTotal/loanTime;
+        loanTotal = loanAmount + loanInterest;
+        loanInstallment = loanTotal / loanTime;
 
         tvInterest.setText(getString(R.string.con_amount, df.format(loanInterest)));
         tvTotalLoan.setText(getString(R.string.con_amount, df.format(loanTotal)));
