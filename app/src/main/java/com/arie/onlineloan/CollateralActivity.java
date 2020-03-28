@@ -335,7 +335,7 @@ public class CollateralActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!tvLocation.getText().toString().trim().isEmpty() && !tvSize.getText().toString().trim().isEmpty() && !tvEstimatedPrice.getText().toString().trim().isEmpty() && spHouseOwner.getSelectedItem() != null) {
                     if (houseCertificateImage != null && houseImage != null) {
-                        HashMap<String, String> loanCheckMap = createParam(1);
+                        HashMap<String, String> loanCheckMap = createParam(2);
                         checkHouseLoan(loanCheckMap);
                     } else
                         Toast.makeText(CollateralActivity.this, getString(R.string.msg_upload_document_loan), Toast.LENGTH_SHORT).show();
