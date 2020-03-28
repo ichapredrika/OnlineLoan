@@ -20,6 +20,6 @@ public class phpConf {
     public final static String URL_GET_DETAIL_TRANSACTION = "https://"+ ip +"/onlineloan/get_detail_transaction.php";
     public final static String URL_GET_PROFILE = "https://"+ ip +"/onlineloan/get_user_profile.php";
     public final static String URL_UPDATE_PROFILE = "https://"+ ip +"/onlineloan/update_user_profile.php";
-
+//
 
 }
