@@ -17,28 +17,28 @@
             android:id="@+id/ll_approval"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_reject"
+                style="@style/Button.Negative"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="8dp"
-                style="@style/Button.Negative"
-                android:text="@string/reject"/>
+                android:layout_weight="1"
+                android:text="@string/reject" />
 
             <Button
                 android:id="@+id/btn_approve"
+                style="@style/Button.Positive"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="0dp"
-                style="@style/Button.Positive"
-                android:text="@string/approve"/>
+                android:layout_weight="1"
+                android:text="@string/approve" />
 
         </LinearLayout>
 
@@ -72,7 +72,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:text="@string/name"/>
+                        android:text="@string/name" />
 
                     <TextView
                         android:id="@+id/txt_name"
@@ -80,8 +80,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/colorTextBrown"
-                        tools:text="Arie Sukma Tarigan"
-                        />
+                        tools:text="Arie Sukma Tarigan" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -94,7 +93,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:text="@string/nik_no_ktp"/>
+                        android:text="@string/nik_no_ktp" />
 
                     <TextView
                         android:id="@+id/txt_nik"
@@ -115,7 +114,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:text="@string/account_number"/>
+                        android:text="@string/account_number" />
 
                     <TextView
                         android:id="@+id/txt_account_number"
@@ -267,63 +266,64 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/location"/>
+                    android:text="@string/location" />
 
                 <TextView
                     android:id="@+id/txt_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Jl. Gatot Subroto, Jakarta Pusat"
+                    android:textColor="@color/colorBgGreen"
                     android:textStyle="bold"
-                    android:textColor="@color/colorBgGreen"/>
+                    tools:text="Jl. Gatot Subroto, Jakarta Pusat" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/area_size_m2"/>
+                    android:text="@string/area_size_m2" />
 
                 <TextView
                     android:id="@+id/txt_area_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="400"
+                    android:textColor="@color/colorBgGreen"
                     android:textStyle="bold"
-                    android:textColor="@color/colorBgGreen"/>
+                    tools:text="400" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/estimated_price_rp"/>
+                    android:text="@string/estimated_price_rp" />
 
                 <TextView
                     android:id="@+id/txt_estimated_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Rp 345.000.000"
+                    android:textColor="@color/colorBgGreen"
                     android:textStyle="bold"
-                    android:textColor="@color/colorBgGreen"/>
+                    tools:text="Rp 345.000.000" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:text="@string/house_certificate"/>
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/house_photo"/>
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/house_certificate" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/house_photo" />
 
                 </LinearLayout>
 
@@ -335,18 +335,18 @@
                     <ImageView
                         android:id="@+id/img_house_certificate"
                         android:layout_width="100dp"
-                        android:layout_weight="1"
                         android:layout_height="150dp"
                         android:layout_margin="8dp"
-                        tools:src="@drawable/ic_upload_image"/>
+                        android:layout_weight="1"
+                        tools:src="@drawable/ic_upload_image" />
 
                     <ImageView
                         android:id="@+id/img_house_photo"
                         android:layout_width="100dp"
-                        android:layout_weight="1"
-                        android:layout_margin="8dp"
                         android:layout_height="150dp"
-                        tools:src="@drawable/ic_upload_image"/>
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        tools:src="@drawable/ic_upload_image" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -369,43 +369,43 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/brand"/>
+                    android:text="@string/brand" />
 
                 <TextView
                     android:id="@+id/txt_brand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Daihatsu"
+                    android:textColor="@color/colorBgGreen"
                     android:textStyle="bold"
-                    android:textColor="@color/colorBgGreen"/>
+                    tools:text="Daihatsu" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/model"/>
+                    android:text="@string/model" />
 
                 <TextView
                     android:id="@+id/txt_model"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="400"
+                    android:textColor="@color/colorBgGreen"
                     android:textStyle="bold"
-                    android:textColor="@color/colorBgGreen"/>
+                    tools:text="400" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/manufacture_year"/>
+                    android:text="@string/manufacture_year" />
 
                 <TextView
                     android:id="@+id/txt_manufacture_year"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Rp 345.000.000"
+                    android:textColor="@color/colorBgGreen"
                     android:textStyle="bold"
-                    android:textColor="@color/colorBgGreen"/>
+                    tools:text="Rp 345.000.000" />
 
 
                 <LinearLayout
@@ -415,19 +415,19 @@
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/stnk"/>
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/stnk" />
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/bpkb"/>
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/bpkb" />
 
                 </LinearLayout>
 
@@ -439,82 +439,91 @@
                     <ImageView
                         android:id="@+id/img_stnk"
                         android:layout_width="100dp"
-                        android:layout_weight="1"
                         android:layout_height="150dp"
                         android:layout_margin="8dp"
-                        tools:src="@drawable/ic_upload_image"/>
+                        android:layout_weight="1"
+                        tools:src="@drawable/ic_upload_image" />
 
 
                     <ImageView
                         android:id="@+id/img_bpkb"
                         android:layout_width="100dp"
-                        android:layout_weight="1"
                         android:layout_height="150dp"
                         android:layout_margin="8dp"
-                        tools:src="@drawable/ic_upload_image"/>
+                        android:layout_weight="1"
+                        tools:src="@drawable/ic_upload_image" />
                 </LinearLayout>
 
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            style="@style/Text.Title"
+        <LinearLayout
+            android:id="@+id/ll_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/payment" />
+            android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_payment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginTop="8dp"
-            app:cardCornerRadius="10dp"
-            app:contentPadding="5dp">
-
-            <LinearLayout
+            <TextView
+                style="@style/Text.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:layout_marginTop="16dp"
+                android:text="@string/payment" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_bank"/>
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:orientation="vertical"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/pembayaran_cicilan_ke" />
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="match_parent"
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_bank" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/_563343656235575642"/>
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="0dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/pembayaran_cicilan_ke" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/_563343656235575642"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </ScrollView>

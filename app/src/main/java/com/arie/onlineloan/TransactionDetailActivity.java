@@ -33,9 +33,10 @@ import java.util.HashMap;
 
 public class TransactionDetailActivity extends AppCompatActivity {
 
-    private static String ORIGIN_APPLY = "apply";
-    private static String ORIGIN_USER = "list";
-    private static String ORIGIN_ADMIN = "admin";
+    public static String ORIGIN_APPLY = "apply";
+    public static String ORIGIN_USER = "list";
+    public static String ORIGIN_ADMIN = "admin";
+    public static String ORIGIN_PENDING = "pending";
     private static String COLLATERAL_CAR = "Collateral Car";
     private static String COLLATERAL_MOTORCYCLE = "Collateral Motorcycle";
     private static String COLLATERAL_HOUSE = "Collateral House";
@@ -50,6 +51,8 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private LinearLayout llApproval;
     private Button btnReject, btnApprove;
 
+    private LinearLayout llPayment;
+
     private TextView tvCollateral;
     private TextView tvName, tvNik, tvAccountNumber;
     private TextView tvLoanAmount, tvTimePeriod, tvInstallment, tvStatus, tvLoanTotal;
@@ -61,8 +64,6 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private CardView cvVehicle;
     private TextView tvBrand, tvModel, tvManufactureYear;
     private ImageView imgStnk, imgBpkb;
-
-    private CardView cvPayment;
 
     private DecimalFormat df = new DecimalFormat("#,###");
 
@@ -88,6 +89,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
         transType = intent.getStringExtra("transType");
 
         llApproval = findViewById(R.id.ll_approval);
+        llPayment = findViewById(R.id.ll_payment);
         btnApprove = findViewById(R.id.btn_approve);
         btnReject = findViewById(R.id.btn_reject);
 
@@ -115,17 +117,18 @@ public class TransactionDetailActivity extends AppCompatActivity {
         imgBpkb = findViewById(R.id.img_bpkb);
         imgStnk = findViewById(R.id.img_stnk);
 
-        cvPayment = findViewById(R.id.cv_payment);
-
         if (origin.equals(ORIGIN_APPLY)) {
             llApproval.setVisibility(View.GONE);
-            cvPayment.setVisibility(View.VISIBLE);
+            llPayment.setVisibility(View.VISIBLE);
         } else if (origin.equals(ORIGIN_USER)) {
             llApproval.setVisibility(View.GONE);
-            cvPayment.setVisibility(View.VISIBLE);
+            llPayment.setVisibility(View.VISIBLE);
         } else if (origin.equals(ORIGIN_ADMIN)) {
             llApproval.setVisibility(View.VISIBLE);
-            cvPayment.setVisibility(View.GONE);
+            llPayment.setVisibility(View.GONE);
+        }else if (origin.equals(ORIGIN_PENDING)) {
+            llApproval.setVisibility(View.VISIBLE);
+            llPayment.setVisibility(View.GONE);
         }
 
         if(transType.equals(NON_COLLATERAL)){
@@ -217,8 +220,8 @@ public class TransactionDetailActivity extends AppCompatActivity {
                             bmHousePhoto = decodeBitmap(housePhoto);
                             bmHouseCertificate = decodeBitmap(houseCertificate);
 
-                            imgBpkb.setImageBitmap(bmBppkb);
-                            imgStnk.setImageBitmap(bmStnk);
+                            imgHouseCertificate.setImageBitmap(bmHouseCertificate);
+                            imgHousePhoto.setImageBitmap(bmHousePhoto);
 
                             tvLocation.setText(location);
                             tvAreaSize.setText(areaSize);

@@ -67,6 +67,8 @@ public class MainCustomerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent inTrans = new Intent(MainCustomerActivity.this, TransactionActivity.class);
+                inTrans.putExtra("type", TransactionActivity.LIST_USER);
+                inTrans.putExtra("origin", TransactionDetailActivity.ORIGIN_USER);
                 startActivity(inTrans);
             }
         });

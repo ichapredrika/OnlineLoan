@@ -13,6 +13,8 @@ public class phpConf {
     public final static String URL_CHECK_COLLATERAL_VEHICLE = "https://"+ ip +"/onlineloan/check_collateral_vehicle.php";
     public final static String URL_CHECK_NON_COLLATERAL = "https://"+ ip +"/onlineloan/check_non_collateral.php";
     public final static String URL_GET_ALL_TRANSACTION = "https://"+ ip +"/onlineloan/get_all_transaction.php";
+    public final static String URL_GET_USER_TRANSACTION = "https://"+ ip +"/onlineloan/get_trx_by_user.php";
+    public final static String URL_GET_PENDING_TRANSACTION = "https://"+ ip +"/onlineloan/get_pending_trx.php";
     public final static String URL_GET_VEHICLE_BRAND = "https://"+ ip +"/onlineloan/get_vehicle_brand.php";
     public final static String URL_GET_VEHICLE_MODEL = "https://"+ ip +"/onlineloan/get_vehicle_model.php";
     public final static String URL_GET_DETAIL_TRANSACTION = "https://"+ ip +"/onlineloan/get_detail_transaction.php";

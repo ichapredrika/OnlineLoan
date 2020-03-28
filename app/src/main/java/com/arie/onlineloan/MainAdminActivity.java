@@ -56,6 +56,8 @@ public class MainAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent inTrans = new Intent(MainAdminActivity.this, TransactionActivity.class);
+                inTrans.putExtra("type", TransactionActivity.LIST_ADMIN);
+                inTrans.putExtra("origin", TransactionDetailActivity.ORIGIN_ADMIN);
                 startActivity(inTrans);
             }
         });
@@ -63,7 +65,7 @@ public class MainAdminActivity extends AppCompatActivity {
         llProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent inProfile = new Intent(MainAdminActivity.this, TransactionActivity.class);
+                Intent inProfile = new Intent(MainAdminActivity.this, ProfileActivity.class);
                 startActivity(inProfile);
             }
         });
@@ -71,8 +73,10 @@ public class MainAdminActivity extends AppCompatActivity {
         llApproval.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent inProfile = new Intent(MainAdminActivity.this, ApprovalActivity.class);
-                startActivity(inProfile);
+                Intent inTrans = new Intent(MainAdminActivity.this, TransactionActivity.class);
+                inTrans.putExtra("type", TransactionActivity.LIST_PENDING);
+                inTrans.putExtra("origin", TransactionDetailActivity.ORIGIN_PENDING);
+                startActivity(inTrans);
             }
         });
     }
