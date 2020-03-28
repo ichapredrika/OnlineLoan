@@ -253,28 +253,52 @@
                         android:textStyle="bold"
                         tools:text="House" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/location" />
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txt_location"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:hint="@string/location"
+                        android:hint="@string/jl_ki_hajar_dewantara_cikarang"
                         android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/area_size_m2" />
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txt_size"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:hint="@string/area_size_m2"
+                        android:hint="@string/two_thousand"
                         android:inputType="numberDecimal"
                         android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/estimated_price_rp" />
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txt_estimated_price"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:hint="@string/estimated_price_rp"
+                        android:hint="@string/_500_000_000"
                         android:inputType="number"
                         android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/owner" />
 
                     <Spinner
                         android:id="@+id/sp_house_owner"
