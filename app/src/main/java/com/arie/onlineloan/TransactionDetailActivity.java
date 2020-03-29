@@ -41,10 +41,14 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private static String COLLATERAL_MOTORCYCLE = "Collateral Motorcycle";
     private static String COLLATERAL_HOUSE = "Collateral House";
     private static String NON_COLLATERAL = "Non Collateral";
+    private static String APPROVED = "Approved";
+    private static String REJECTED = "Rejected";
+    private static String PENDING = "Pending";
 
     private String transId;
     private String origin;
     private String transType;
+    private String transStatus;
 
     private ProgressDialog loading;
 
@@ -58,7 +62,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private TextView tvLoanAmount, tvTimePeriod, tvInstallment, tvStatus, tvLoanTotal;
 
     private CardView cvHouse;
-    private TextView tvLocation, tvAreaSize, tvEstimatedPrice;
+    private TextView tvLocation, tvAreaSize, tvEstimatedPrice, tvHouseOwner;
     private ImageView imgHouseCertificate, imgHousePhoto;
 
     private CardView cvVehicle;
@@ -107,6 +111,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
         tvLocation = findViewById(R.id.txt_location);
         tvAreaSize = findViewById(R.id.txt_area_size);
         tvEstimatedPrice = findViewById(R.id.txt_estimated_price);
+        tvHouseOwner = findViewById(R.id.txt_owner);
         imgHouseCertificate = findViewById(R.id.img_house_certificate);
         imgHousePhoto = findViewById(R.id.img_house_photo);
 
@@ -116,20 +121,6 @@ public class TransactionDetailActivity extends AppCompatActivity {
         tvManufactureYear = findViewById(R.id.txt_manufacture_year);
         imgBpkb = findViewById(R.id.img_bpkb);
         imgStnk = findViewById(R.id.img_stnk);
-
-        if (origin.equals(ORIGIN_APPLY)) {
-            llApproval.setVisibility(View.GONE);
-            llPayment.setVisibility(View.VISIBLE);
-        } else if (origin.equals(ORIGIN_USER)) {
-            llApproval.setVisibility(View.GONE);
-            llPayment.setVisibility(View.VISIBLE);
-        } else if (origin.equals(ORIGIN_ADMIN)) {
-            llApproval.setVisibility(View.VISIBLE);
-            llPayment.setVisibility(View.GONE);
-        }else if (origin.equals(ORIGIN_PENDING)) {
-            llApproval.setVisibility(View.VISIBLE);
-            llPayment.setVisibility(View.GONE);
-        }
 
         if(transType.equals(NON_COLLATERAL)){
             cvVehicle.setVisibility(View.GONE);
@@ -143,6 +134,87 @@ public class TransactionDetailActivity extends AppCompatActivity {
         }
 
         reqTransDetail();
+
+        btnApprove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeStatus(APPROVED);
+            }
+        });
+
+        btnReject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeStatus(REJECTED);
+            }
+        });
+    }
+
+    private void showHideItem(){
+        if (origin.equals(ORIGIN_APPLY)) {
+            llApproval.setVisibility(View.GONE);
+            llPayment.setVisibility(View.VISIBLE);
+        } else if (origin.equals(ORIGIN_USER)) {
+            llApproval.setVisibility(View.GONE);
+            llPayment.setVisibility(View.VISIBLE);
+        } else if (origin.equals(ORIGIN_ADMIN)) {
+            if(transStatus.equals(PENDING)){
+                llApproval.setVisibility(View.VISIBLE);
+            }else llApproval.setVisibility(View.GONE);
+            llPayment.setVisibility(View.GONE);
+        }else if (origin.equals(ORIGIN_PENDING)) {
+            if(transStatus.equals(PENDING)){
+                llApproval.setVisibility(View.VISIBLE);
+            }else llApproval.setVisibility(View.GONE);
+            llPayment.setVisibility(View.GONE);
+        }
+    }
+    private void changeStatus(final String status) {
+        loading = ProgressDialog.show(TransactionDetailActivity.this, "Loading Data...", "Please Wait...", false, false);
+        RequestQueue mRequestQueue = Volley.newRequestQueue(TransactionDetailActivity.this);
+
+        StringRequest mStringRequest = new StringRequest(Request.Method.POST, phpConf.URL_CHANGE_STATUS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                try {
+                    Log.d("Json getDetailTrans", s);
+                    JSONObject jsonObject = new JSONObject(s);
+                    JSONArray data = jsonObject.getJSONArray("result");
+                    JSONObject jo = data.getJSONObject(0);
+
+                    Log.d("tagJsonObject", jo.toString());
+                    String response = jo.getString("response");
+                    String message = jo.getString("message");
+                    Toast.makeText(TransactionDetailActivity.this, message, Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
+                    if (response.equals("1")) {
+                      reqTransDetail();
+                    }
+
+                } catch (JSONException e) {
+                    loading.dismiss();
+                    e.printStackTrace();
+                }
+                loading.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                Log.d("tag", String.valueOf(error));
+                Toast.makeText(TransactionDetailActivity.this, getString(R.string.msg_connection_error), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected java.util.Map<String, String> getParams() {
+                java.util.Map<String, String> params = new HashMap<>();
+                params.put("TRX_ID", transId);
+                params.put("STATUS", status);
+                Log.d("tag", params.toString());
+                return params;
+            }
+        };
+        mRequestQueue.add(mStringRequest);
     }
 
     private void reqTransDetail() {
@@ -173,6 +245,8 @@ public class TransactionDetailActivity extends AppCompatActivity {
                         String loanTotalStr = jo.getString("TOTAL_LOAN");
                         String installmentStr = jo.getString("INSTALLMENT");
 
+                        transStatus = status;
+                        showHideItem();
                         loanAmount = Integer.parseInt(loanAmountStr);
                         loanTime = Integer.parseInt(timePeriodStr);
                         loanTotal = Integer.parseInt(loanTotalStr);
@@ -214,6 +288,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
                             String location = jo.getString("LOCATION");
                             String areaSize = jo.getString("AREA_SIZE");
                             String estimatedPrice = jo.getString("ESTIMATED_PRICE");
+                            String houseOwner = jo.getString("OWNER");
                             String houseCertificate = jo.getString("HOUSE_CERTIFICATE");
                             String housePhoto = jo.getString("HOUSE_PHOTO");
 
@@ -226,6 +301,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
                             tvLocation.setText(location);
                             tvAreaSize.setText(areaSize);
                             tvEstimatedPrice.setText(estimatedPrice);
+                            tvHouseOwner.setText(houseOwner);
                         }
 
                     } else {

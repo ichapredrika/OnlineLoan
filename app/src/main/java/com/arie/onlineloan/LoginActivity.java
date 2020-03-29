@@ -125,9 +125,11 @@ public class LoginActivity extends AppCompatActivity {
                         if(userRole.equals("ADMIN")){
                             Intent intentAdmin = new Intent(LoginActivity.this, MainAdminActivity.class);
                             startActivity(intentAdmin);
+                            finish();
                         }else{
                             Intent intentCustomer = new Intent(LoginActivity.this, MainCustomerActivity.class);
                             startActivity(intentCustomer);
+                            finish();
                         }
 
                         Toast.makeText(LoginActivity.this, "Welcome, " + userName + " !", Toast.LENGTH_SHORT).show();

@@ -47,7 +47,7 @@ public class MainAdminActivity extends AppCompatActivity {
         llReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent inReport = new Intent(MainAdminActivity.this, TransactionActivity.class);
+                Intent inReport = new Intent(MainAdminActivity.this, ReportActivity.class);
                 startActivity(inReport);
             }
         });

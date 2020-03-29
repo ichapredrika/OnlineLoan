@@ -767,11 +767,11 @@ public class CollateralActivity extends AppCompatActivity {
         loading = ProgressDialog.show(CollateralActivity.this, "Loading Data...", "Please Wait...", false, false);
         RequestQueue mRequestQueue = Volley.newRequestQueue(CollateralActivity.this);
 
-        StringRequest mStringRequest = new StringRequest(Request.Method.POST, phpConf.URL_CHECK_NON_COLLATERAL, new Response.Listener<String>() {
+        StringRequest mStringRequest = new StringRequest(Request.Method.POST, phpConf.URL_APPLY_COLLATERAL_HOUSE, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 try {
-                    Log.d("Json checkNonCollateral", s);
+                    Log.d("Json applyCHouse", s);
                     JSONObject jsonObject = new JSONObject(s);
                     JSONArray data = jsonObject.getJSONArray("result");
 
@@ -779,30 +779,16 @@ public class CollateralActivity extends AppCompatActivity {
 
                     Log.d("tagJsonObject", jo.toString());
                     String response = jo.getString("response");
+                    String message = jo.getString("message");
+                    Toast.makeText(CollateralActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     if (response.equals("1")) {
-                       /* minLoanAmount = jo.getString("MIN_LOAN_AMOUNT");
-                        maxLoanAmount = jo.getString("MAX_LOAN_AMOUNT");
-                        minLoanTime = jo.getString("MIN_LOAN_TIME");
-                        maxLoanTime = jo.getString("MAX_LOAN_TIME");
-                        String interest = jo.getString("INTEREST");
-
-                        interestDouble = Double.parseDouble(interest);
-                        minLoanAmountInt = Integer.parseInt(minLoanAmount);
-                        maxLoanAmountInt = Integer.parseInt(maxLoanAmount);
-                        minLoanTimeInt = Integer.parseInt(minLoanTime);
-                        maxLoanTimeInt = Integer.parseInt(maxLoanTime);
-
-                        tvMinAmount.setText(getString(R.string.min_loan_amount, df.format(minLoanAmountInt)));
-                        tvMaxAmount.setText(getString(R.string.max_loan_amount, df.format(maxLoanAmountInt)));
-                        tvMinTime.setText(getString(R.string.min_loan_time, minLoanTime));
-                        tvMaxTime.setText(getString(R.string.max_loan_time, maxLoanTime));
-                        sbAmount.setProgress(100);
-                        sbAmount.setProgress(100);*/
-
-                    } else {
-                        String message = jo.getString("message");
-                        Toast.makeText(CollateralActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Intent inTransDetail = new Intent(CollateralActivity.this, TransactionDetailActivity.class);
+                        inTransDetail.putExtra("transId", transId);
+                        inTransDetail.putExtra("origin", "apply");
+                        inTransDetail.putExtra("transType",collateralType );
+                        startActivity(inTransDetail);
+                        finish();
                     }
                 } catch (JSONException e) {
                     loading.dismiss();
@@ -821,13 +807,33 @@ public class CollateralActivity extends AppCompatActivity {
             @Override
             protected java.util.Map<String, String> getParams() {
                 java.util.Map<String, String> params = new HashMap<>();
+
+                Date date= new Date();
+                long time = date.getTime();
+                Timestamp ts = new Timestamp(time);
+                String timestamp = ts.toString().replace(" ","-");
+                timestamp = timestamp.replace(":","");
+                transId = user.getUserId().substring(0,3)+"-"+timestamp;
+                Log.d("transId", transId);
+
+                UUID uuid = UUID.randomUUID();
+                transHeader = uuid.toString().replace("-","").toUpperCase();
+
                 params.put("USER_ID", user.getUserId());
-                params.put("LOAN_TYPE", user.getUserId());
-                params.put("LOAN_AMOUNT", user.getUserId());
-                params.put("TIME_PERIOD", user.getUserId());
-                params.put("INTEREST", user.getUserId());
-                params.put("ADDRESS", user.getUserId());
-                params.put("INSTALLMENT", user.getUserId());
+                params.put("LOAN_TYPE", collateralType);
+                params.put("LOAN_AMOUNT", Integer.toString(loanAmount));
+                params.put("TIME_PERIOD", Integer.toString(loanTime));
+                params.put("INTEREST", Integer.toString(loanInterest));
+                params.put("INSTALLMENT", Integer.toString(loanInstallment));
+                params.put("LOAN_TOTAL", Integer.toString(loanTotal));
+                params.put("OWNER", spHouseOwner.getSelectedItem().toString());
+                params.put("LOCATION", tvLocation.getText().toString().trim());
+                params.put("AREA_SIZE", tvSize.getText().toString().trim());
+                params.put("ESTIMATED_PRICE", tvEstimatedPrice.getText().toString().trim());
+                params.put("HOUSE_CERTIFICATE", houseCertificateImage);
+                params.put("HOUSE_PHOTO", houseImage);
+                params.put("UUID_HEADER", transHeader);
+                params.put("TRX_ID", transId);
                 return params;
             }
         };
@@ -948,28 +954,4 @@ public class CollateralActivity extends AppCompatActivity {
             }
         }
     }
-
-    public boolean isCameraPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{CAMERA}, 1);
-                return false;
-            }
-        } else {
-            return true;
-        }
-    }
-
-   /* private void calculateLoan(){
-        double interest = interestDouble* loanTime*loanAmount;
-        loanInterest = (int) interest;
-        loanTotal = loanAmount+ loanInterest;
-        loanInstallment = loanTotal/loanTime;
-
-        tvInterest.setText(getString(R.string.con_amount, df.format(loanInterest)));
-        tvTotalLoan.setText(getString(R.string.con_amount, df.format(loanTotal)));
-        tvInstallment.setText(getString(R.string.con_amount, df.format(loanInstallment)));
-    }*/
 }

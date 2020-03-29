@@ -93,4 +93,11 @@
     <string name="two_thousand">2000</string>
     <string name="_500_000_000">500.000.000</string>
     <string name="owner">Owner</string>
+    <string name="report_selection">Report Selection</string>
+    <string name="chart_type">Chart Type</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="generate">Generate</string>
+    <string name="loan_categorized_by_type">Loan Categorized by Type</string>
+    <string name="house_owner">House Owner</string>
 </resources>

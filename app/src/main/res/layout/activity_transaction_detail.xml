@@ -304,6 +304,20 @@
                     android:textStyle="bold"
                     tools:text="Rp 345.000.000" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/house_owner" />
+
+                <TextView
+                    android:id="@+id/txt_owner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBgGreen"
+                    android:textStyle="bold"
+                    tools:text="Borrower" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
