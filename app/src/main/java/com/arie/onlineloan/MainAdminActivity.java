@@ -25,10 +25,10 @@ public class MainAdminActivity extends AppCompatActivity {
 
         TextView tvWelcome = findViewById(R.id.txt_welcome);
         ImageView imgLogout = findViewById(R.id.img_logout);
-        TextView tvProfile = findViewById(R.id.txt_profile);
+        TextView tvInterest = findViewById(R.id.txt_interest);
         LinearLayout llReport = findViewById(R.id.ll_report);
         LinearLayout llTransaction = findViewById(R.id.ll_transaction);
-        LinearLayout llProfile = findViewById(R.id.ll_profile);
+        LinearLayout llInterest = findViewById(R.id.ll_interest);
         LinearLayout llApproval = findViewById(R.id.ll_approval);
 
         String welcome = getString(R.string.welcome, userModel.getFullname());
@@ -62,11 +62,11 @@ public class MainAdminActivity extends AppCompatActivity {
             }
         });
 
-        llProfile.setOnClickListener(new View.OnClickListener() {
+        llInterest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent inProfile = new Intent(MainAdminActivity.this, ProfileActivity.class);
-                startActivity(inProfile);
+                Intent inInterest = new Intent(MainAdminActivity.this, InterestSettingActivity.class);
+                startActivity(inInterest);
             }
         });
 

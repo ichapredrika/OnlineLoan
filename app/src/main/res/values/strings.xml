@@ -100,4 +100,11 @@
     <string name="generate">Generate</string>
     <string name="loan_categorized_by_type">Loan Categorized by Type</string>
     <string name="house_owner">House Owner</string>
+    <string name="interest_setting">Interest Setting</string>
+    <string name="interest_rate">Interest Rate</string>
+    <string name="non_collateral">Non Collateral</string>
+    <string name="collateral_car">Collateral Car</string>
+    <string name="collateral_motorcycle">Collateral Motorcycle</string>
+    <string name="collateral_house">Collateral House</string>
+    <string name="save_interest_rate">Save Interest Rate</string>
 </resources>
