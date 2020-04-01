@@ -1,5 +1,6 @@
 package com.arie.onlineloan;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -46,12 +47,21 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import static android.Manifest.permission.CAMERA;
 
@@ -191,6 +201,8 @@ public class CollateralActivity extends AppCompatActivity {
 
         mUserPreference = new UserPreference(this);
         user = mUserPreference.getUser();
+
+        handleSSLHandshake();
 
         llCm.setVisibility(View.GONE);
         llHouse.setVisibility(View.GONE);
@@ -952,6 +964,37 @@ public class CollateralActivity extends AppCompatActivity {
                 BitmapHelper.getInstance().setBitmap(photoBitmap);
                 houseImage = getStringImage(photoBitmap);
             }
+        }
+    }
+
+
+    @SuppressLint("TrulyRandom")
+    public static void handleSSLHandshake() {
+        try {
+            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }
+
+                @Override
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                }
+            }};
+
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String arg0, SSLSession arg1) {
+                    return true;
+                }
+            });
+        } catch (Exception ignored) {
         }
     }
 }
