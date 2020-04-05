@@ -33,6 +33,7 @@ public class MainCustomerActivity extends AppCompatActivity {
         LinearLayout llNonCollateral = findViewById(R.id.ll_non_collateral);
         LinearLayout llTransaction = findViewById(R.id.ll_transaction);
         LinearLayout llProfile = findViewById(R.id.ll_profile);
+        LinearLayout llLoanInfo = findViewById(R.id.ll_loan_info);
 
         String welcome = getString(R.string.welcome, userModel.getFullname());
         tvWelcome.setText(welcome);
@@ -43,6 +44,14 @@ public class MainCustomerActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainCustomerActivity.this, LoginActivity.class);
                 mUserPreference.logoutUser();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        llLoanInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainCustomerActivity.this, LoanInfoActivity.class);
                 startActivity(intent);
             }
         });

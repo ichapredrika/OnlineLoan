@@ -1,7 +1,7 @@
 package com.arie.onlineloan;
 
 public class phpConf {
-    private final static String ip = "192.168.0.111";
+    private final static String ip = "192.168.0.115";
 
     public final static String URL_CONNECTION = "https://"+ ip +"/onlineloan/connection.php";
     public final static String URL_LOGIN = "https://"+ ip +"/onlineloan/login.php";
@@ -17,6 +17,7 @@ public class phpConf {
     public final static String URL_GET_PENDING_TRANSACTION = "https://"+ ip +"/onlineloan/get_pending_trx.php";
     public final static String URL_GET_VEHICLE_BRAND = "https://"+ ip +"/onlineloan/get_vehicle_brand.php";
     public final static String URL_GET_VEHICLE_MODEL = "https://"+ ip +"/onlineloan/get_vehicle_model.php";
+    public final static String URL_GET_VEHICLE_YEAR = "https://"+ ip +"/onlineloan/get_year.php";
     public final static String URL_GET_DETAIL_TRANSACTION = "https://"+ ip +"/onlineloan/get_detail_transaction.php";
     public final static String URL_GET_PROFILE = "https://"+ ip +"/onlineloan/get_user_profile.php";
     public final static String URL_UPDATE_PROFILE = "https://"+ ip +"/onlineloan/update_user_profile.php";

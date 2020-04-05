@@ -107,4 +107,5 @@
     <string name="collateral_motorcycle">Collateral Motorcycle</string>
     <string name="collateral_house">Collateral House</string>
     <string name="save_interest_rate">Save Interest Rate</string>
+    <string name="loan_info">Loan Info</string>
 </resources>

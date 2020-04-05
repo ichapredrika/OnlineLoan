@@ -235,14 +235,39 @@ public class CollateralActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 dataModel.clear();
-                dataYear.clear();
                 getVehicleModel(spBrand.getSelectedItem().toString());
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
+
             }
 
+        });
+
+        spModel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                dataYear.clear();
+                getVehicleYear(collateral);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spManufactureYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
 
         imgStnk.setOnClickListener(new View.OnClickListener() {
@@ -370,13 +395,13 @@ public class CollateralActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() != 0){
+                if (s.length() != 0) {
                     int inputtedAmount = Integer.parseInt(s.toString().trim());
 
                     loanAmount = inputtedAmount;
-                    String amount = getString(R.string.con_amount,df.format(loanAmount));
+                    String amount = getString(R.string.con_amount, df.format(loanAmount));
                     tvLoanAmount.setText(amount);
-                    if(loanTime>0) calculateLoan();
+                    if (loanTime > 0) calculateLoan();
                 }
             }
         });
@@ -384,12 +409,12 @@ public class CollateralActivity extends AppCompatActivity {
         sbTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                int result = (progress* maxLoanTimeInt)/100;
-                tvTimePeriod.setText(getString(R.string.con_month,result));
-                tvTimePeriodEdit.setText(getString(R.string.con_month,result));
+                int result = (progress * maxLoanTimeInt) / 100;
+                tvTimePeriod.setText(getString(R.string.con_month, result));
+                tvTimePeriodEdit.setText(getString(R.string.con_month, result));
                 loanTime = result;
 
-                if (loanAmount>0 && loanTime>0 ){
+                if (loanAmount > 0 && loanTime > 0) {
                     calculateLoan();
                 }
             }
@@ -408,27 +433,27 @@ public class CollateralActivity extends AppCompatActivity {
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (loanAmount<minLoanAmountInt || loanAmount>maxLoanAmountInt){
+                if (loanAmount < minLoanAmountInt || loanAmount > maxLoanAmountInt) {
                     Toast.makeText(CollateralActivity.this, getString(R.string.msg_amount_between_min_max), Toast.LENGTH_SHORT).show();
-                }else if (loanTime<minLoanTimeInt || loanTime>maxLoanTimeInt){
+                } else if (loanTime < minLoanTimeInt || loanTime > maxLoanTimeInt) {
                     Toast.makeText(CollateralActivity.this, getString(R.string.msg_time_between_min_max), Toast.LENGTH_SHORT).show();
-                }else if(!cbTerms.isChecked()){
+                } else if (!cbTerms.isChecked()) {
                     Toast.makeText(CollateralActivity.this, getString(R.string.msg_check_terms), Toast.LENGTH_SHORT).show();
-                }else{
-                    if (collateral.equals(HOUSE)){
+                } else {
+                    if (collateral.equals(HOUSE)) {
                         applyCollateralHouse();
-                    }else applyCollateralVehicle();
+                    } else applyCollateralVehicle();
 
                 }
             }
         });
     }
 
-    private void calculateLoan(){
-        double interest = interestDouble* loanTime*loanAmount;
+    private void calculateLoan() {
+        double interest = interestDouble * loanTime * loanAmount;
         loanInterest = (int) interest;
-        loanTotal = loanAmount+ loanInterest;
-        loanInstallment = loanTotal/loanTime;
+        loanTotal = loanAmount + loanInterest;
+        loanInstallment = loanTotal / loanTime;
 
         tvInterest.setText(getString(R.string.con_amount, df.format(loanInterest)));
         tvTotalLoan.setText(getString(R.string.con_amount, df.format(loanTotal)));
@@ -505,6 +530,66 @@ public class CollateralActivity extends AppCompatActivity {
         mRequestQueue.add(mStringRequest);
     }
 
+    private void getVehicleYear(final String type) {
+        loading = ProgressDialog.show(CollateralActivity.this, "Loading Data...", "Please Wait...", false, false);
+        RequestQueue mRequestQueue = Volley.newRequestQueue(CollateralActivity.this);
+
+        StringRequest mStringRequest = new StringRequest(Request.Method.POST, phpConf.URL_GET_VEHICLE_YEAR, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                try {
+
+                    dataYear.clear();
+
+                    Log.d("Json getVehicleYear", s);
+                    JSONObject jsonObject = new JSONObject(s);
+                    JSONArray data = jsonObject.getJSONArray("result");
+                    JSONObject jo = data.getJSONObject(0);
+
+                    Log.d("tagJsonObject", jo.toString());
+                    String response = jo.getString("response");
+
+                    if (response.equals("1")) {
+                        JSONArray brands = jo.getJSONArray("YEAR");
+                        for (int i = 0; i < brands.length(); i++) {
+                            JSONObject item = brands.getJSONObject(i);
+                            String year = item.getString("YEAR");
+                            dataYear.add(year);
+                        }
+                        adapterYear.notifyDataSetChanged();
+                    } else {
+                        loading.dismiss();
+                        String message = jo.getString("message");
+                        Toast.makeText(CollateralActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                    loading.dismiss();
+                } catch (JSONException e) {
+                    loading.dismiss();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                Log.d("tag", String.valueOf(error));
+                Toast.makeText(CollateralActivity.this, getString(R.string.msg_connection_error), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected java.util.Map<String, String> getParams() {
+                java.util.Map<String, String> params = new HashMap<>();
+                params.put("TYPE", type);
+                params.put("BRAND", spBrand.getSelectedItem().toString());
+                params.put("MODEL", spModel.getSelectedItem().toString());
+                Log.d("tag", params.toString());
+                return params;
+            }
+        };
+        mRequestQueue.add(mStringRequest);
+    }
+
+
     private void getVehicleModel(final String brand) {
         loading = ProgressDialog.show(CollateralActivity.this, "Loading Data...", "Please Wait...", false, false);
         RequestQueue mRequestQueue = Volley.newRequestQueue(CollateralActivity.this);
@@ -514,8 +599,6 @@ public class CollateralActivity extends AppCompatActivity {
             public void onResponse(String s) {
                 try {
                     dataModel.clear();
-                    dataYear.clear();
-
                     Log.d("Json getVehicleModel", s);
                     JSONObject jsonObject = new JSONObject(s);
                     JSONArray data = jsonObject.getJSONArray("result");
@@ -528,18 +611,11 @@ public class CollateralActivity extends AppCompatActivity {
                         JSONArray brands = jo.getJSONArray("data");
                         for (int i = 0; i < brands.length(); i++) {
                             JSONObject item = brands.getJSONObject(i);
-                            String id = item.getString("ID");
-                            String brand = item.getString("BRAND");
                             String model = item.getString("MODEL");
-                            String year = item.getString("YEAR");
-                            String price = item.getString("PRICE");
 
                             dataModel.add(model);
-                            dataYear.add(year);
                         }
-                        adapterBrand.notifyDataSetChanged();
                         adapterModel.notifyDataSetChanged();
-                        adapterYear.notifyDataSetChanged();
                     } else {
                         loading.dismiss();
                         String message = jo.getString("message");
@@ -717,7 +793,7 @@ public class CollateralActivity extends AppCompatActivity {
                         Intent inTransDetail = new Intent(CollateralActivity.this, TransactionDetailActivity.class);
                         inTransDetail.putExtra("transId", transId);
                         inTransDetail.putExtra("origin", "apply");
-                        inTransDetail.putExtra("transType",collateralType );
+                        inTransDetail.putExtra("transType", collateralType);
                         startActivity(inTransDetail);
                         finish();
                     }
@@ -739,16 +815,16 @@ public class CollateralActivity extends AppCompatActivity {
             protected java.util.Map<String, String> getParams() {
                 java.util.Map<String, String> params = new HashMap<>();
 
-                Date date= new Date();
+                Date date = new Date();
                 long time = date.getTime();
                 Timestamp ts = new Timestamp(time);
-                String timestamp = ts.toString().replace(" ","-");
-                timestamp = timestamp.replace(":","");
-                transId = user.getUserId().substring(0,3)+"-"+timestamp;
+                String timestamp = ts.toString().replace(" ", "-");
+                timestamp = timestamp.replace(":", "");
+                transId = user.getUserId().substring(0, 3) + "-" + timestamp;
                 Log.d("transId", transId);
 
                 UUID uuid = UUID.randomUUID();
-                transHeader = uuid.toString().replace("-","").toUpperCase();
+                transHeader = uuid.toString().replace("-", "").toUpperCase();
 
                 params.put("USER_ID", user.getUserId());
                 params.put("LOAN_TYPE", collateralType);
@@ -761,10 +837,10 @@ public class CollateralActivity extends AppCompatActivity {
                 params.put("BRAND", spBrand.getSelectedItem().toString());
                 params.put("MODEL", spModel.getSelectedItem().toString());
                 params.put("YEAR", spManufactureYear.getSelectedItem().toString());
-                if (collateral.equals(CAR)){
+                if (collateral.equals(CAR)) {
                     params.put("STNK", stnkCarImage);
                     params.put("BPKB", bpkbCarImage);
-                }else{
+                } else {
                     params.put("STNK", stnkMotorcycleImage);
                     params.put("BPKB", bpkbMotorcycleImage);
                 }
@@ -800,7 +876,7 @@ public class CollateralActivity extends AppCompatActivity {
                         Intent inTransDetail = new Intent(CollateralActivity.this, TransactionDetailActivity.class);
                         inTransDetail.putExtra("transId", transId);
                         inTransDetail.putExtra("origin", "apply");
-                        inTransDetail.putExtra("transType",collateralType );
+                        inTransDetail.putExtra("transType", collateralType);
                         startActivity(inTransDetail);
                         finish();
                     }
@@ -822,16 +898,16 @@ public class CollateralActivity extends AppCompatActivity {
             protected java.util.Map<String, String> getParams() {
                 java.util.Map<String, String> params = new HashMap<>();
 
-                Date date= new Date();
+                Date date = new Date();
                 long time = date.getTime();
                 Timestamp ts = new Timestamp(time);
-                String timestamp = ts.toString().replace(" ","-");
-                timestamp = timestamp.replace(":","");
-                transId = user.getUserId().substring(0,3)+"-"+timestamp;
+                String timestamp = ts.toString().replace(" ", "-");
+                timestamp = timestamp.replace(":", "");
+                transId = user.getUserId().substring(0, 3) + "-" + timestamp;
                 Log.d("transId", transId);
 
                 UUID uuid = UUID.randomUUID();
-                transHeader = uuid.toString().replace("-","").toUpperCase();
+                transHeader = uuid.toString().replace("-", "").toUpperCase();
 
                 params.put("USER_ID", user.getUserId());
                 params.put("LOAN_TYPE", collateralType);
@@ -936,7 +1012,7 @@ public class CollateralActivity extends AppCompatActivity {
         }
     }
 
-    private void proceedImage(Bitmap photoBitmap){
+    private void proceedImage(Bitmap photoBitmap) {
         if (collateralType.equals(COLLATERAL_CAR)) {
             if (imageType.equals(IMG_STNK)) {
                 imgStnk.setImageBitmap(photoBitmap);

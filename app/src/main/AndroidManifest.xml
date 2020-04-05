@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".InterestSettingActivity"></activity>
+        <activity android:name=".LoanInfoActivity"></activity>
+        <activity android:name=".InterestSettingActivity" />
         <activity android:name=".ApprovalActivity" />
         <activity android:name=".ReportActivity" />
         <activity android:name=".TransactionDetailActivity" />
