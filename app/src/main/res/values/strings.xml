@@ -108,4 +108,10 @@
     <string name="collateral_house">Collateral House</string>
     <string name="save_interest_rate">Save Interest Rate</string>
     <string name="loan_info">Loan Info</string>
+    <string name="collateral_loan">Collateral Loan</string>
+    <string name="collateral_desc">Collateral loan is a loan product that provides bigger loan with assets as collateral. The asset that can be guarantee is car, motorcycle, and house. The nominal amount can borrow could be different depend on collateral type. The funds can be disbursed quickly with low interest.</string>
+    <string name="simulation_of_collateral_loan">Simulation of Collateral Loan</string>
+    <string name="non_collateral_loan">Non-Collateral Loan</string>
+    <string name="noncollateral_desc">Non-collateral loan is a loan product that provides credit facilities without the need to guarantee asset The funds that have been obtained from the Bank, can be used for anything, such as financing house renovations, marriages, education, medical treatment, business capital and others financial needs .</string>
+    <string name="simulation_of_non_collateral_loan">Simulation of Non-Collateral Loan</string>
 </resources>
