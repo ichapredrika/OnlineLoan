@@ -72,7 +72,7 @@
     <string name="max_loan_amount">Max Rp. %1$s</string>
     <string name="con_month">%1$d Months</string>
     <string name="con_amount">Rp %1$s</string>
-    <string name="loaner_data">Loaner Data</string>
+    <string name="loaner_data">Customer Data</string>
     <string name="account_number">Account Number</string>
     <string name="loan_detail">Loan Detail</string>
     <string name="installment">Installment</string>
@@ -114,4 +114,9 @@
     <string name="non_collateral_loan">Non-Collateral Loan</string>
     <string name="noncollateral_desc">Non-collateral loan is a loan product that provides credit facilities without the need to guarantee asset The funds that have been obtained from the Bank, can be used for anything, such as financing house renovations, marriages, education, medical treatment, business capital and others financial needs .</string>
     <string name="simulation_of_non_collateral_loan">Simulation of Non-Collateral Loan</string>
+    <string name="check">Check</string>
+    <string name="vehicle_price">Vehicle Price</string>
+    <string name="price">Price</string>
+    <string name="change_price">Change Price</string>
+    <string name="update">Update</string>
 </resources>

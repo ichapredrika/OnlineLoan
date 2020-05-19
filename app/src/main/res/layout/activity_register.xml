@@ -19,34 +19,6 @@
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_fullname"
-            android:hint="@string/full_name"
-            android:inputType="textPersonName"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/border_edit_text"
-            android:paddingStart="20dp"
-            android:paddingEnd="10dp"
-            android:textSize="15sp" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_nik"
-            android:hint="@string/nik_no_ktp"
-            android:inputType="number"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/border_edit_text"
-            android:paddingStart="20dp"
-            android:paddingEnd="10dp"
-            android:textSize="15sp" />
-
-        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_email"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
@@ -60,33 +32,132 @@
             android:paddingEnd="10dp"
             android:textSize="15sp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_phone"
-            android:hint="@string/phone_number"
-            android:inputType="number"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/border_edit_text"
-            android:paddingStart="20dp"
-            android:paddingEnd="10dp"
-            android:textSize="15sp" />
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_address"
-            android:hint="@string/address"
-            android:inputType="textPersonName"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_nik"
+                android:hint="@string/nik_no_ktp"
+                android:inputType="number"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/border_edit_text"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/btn_check_nik"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@string/check"
+                style="@style/Button.Positive"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/border_edit_text"
-            android:paddingStart="20dp"
-            android:paddingEnd="10dp"
-            android:textSize="15sp" />
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/full_name"/>
+
+            <TextView
+                android:id="@+id/txt_fullname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textColor="@color/colorBgGreen"
+                android:textStyle="bold"
+                tools:text="Arie Sukma"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/date_of_birth"/>
+
+            <TextView
+                android:id="@+id/txt_dob"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textColor="@color/colorBgGreen"
+                android:textStyle="bold"
+                tools:text="7 July 1997"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/phone_number"/>
+
+            <TextView
+                android:id="@+id/txt_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textColor="@color/colorBgGreen"
+                android:textStyle="bold"
+                tools:text="ariesukma@gmail.com"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/address"/>
+
+            <TextView
+                android:id="@+id/txt_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textColor="@color/colorBgGreen"
+                android:textStyle="bold"
+                tools:text="Jln Ki Hajar Dewantara, Cikarang"/>
+        </LinearLayout>
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

@@ -153,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
                 java.util.Map<String, String> params = new HashMap<>();
                 params.put("EMAIL", userEmail);
                 params.put("PASSWORD", userPassword);
-
+                Log.d("param", userEmail + " - "+ userPassword);
                 return params;
             }
         };

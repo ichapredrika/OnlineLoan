@@ -8,6 +8,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import java.util.HashMap;
 
 public class TransactionActivity extends AppCompatActivity {
     private RecyclerView rvTransaction;
+    private LinearLayout llTransReport;
     private Transaction transaction;
     private TransactionAdapter transactionAdapter;
     private ProgressDialog loading;
@@ -58,6 +61,7 @@ public class TransactionActivity extends AppCompatActivity {
         String type = intent.getStringExtra("type");
         origin = intent.getStringExtra("origin");
         rvTransaction = findViewById(R.id.rv_transaction);
+        llTransReport = findViewById(R.id.ll_trans_report);
 
         transactionAdapter = new TransactionAdapter(TransactionActivity.this, listTransactionToAdapter, origin);
         transactionAdapter.notifyDataSetChanged();
@@ -67,10 +71,13 @@ public class TransactionActivity extends AppCompatActivity {
 
         if (type.equals(LIST_USER)) {
             getUserTrans();
+            llTransReport.setVisibility(View.GONE);
         } else if (type.equals(LIST_ADMIN)) {
             getAllTrans();
+            llTransReport.setVisibility(View.GONE);
         } else if (type.equals(LIST_PENDING)) {
             getPendingTrans();
+            llTransReport.setVisibility(View.VISIBLE);
         }
     }
 

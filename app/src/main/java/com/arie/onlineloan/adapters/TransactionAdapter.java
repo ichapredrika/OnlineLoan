@@ -2,17 +2,14 @@ package com.arie.onlineloan.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.arie.onlineloan.NonCollateralActivity;
 import com.arie.onlineloan.R;
 import com.arie.onlineloan.TransactionDetailActivity;
 import com.arie.onlineloan.models.Transaction;
@@ -43,8 +40,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(@NonNull TransactionViewHolder holder, int position) {
         final Transaction transaction = listTransaction.get(position);
 
-        String installment = context.getString(R.string.con_amount,df.format(Integer.parseInt(transaction.getInstallment())));
-        String amount = context.getString(R.string.con_amount,df.format(Integer.parseInt(transaction.getLoanAmount())));
+        String installment = context.getString(R.string.con_amount, df.format(Integer.parseInt(transaction.getInstallment())));
+        String amount = context.getString(R.string.con_amount, df.format(Integer.parseInt(transaction.getLoanAmount())));
         holder.tvId.setText(transaction.getId());
         holder.tvStatus.setText(transaction.getStatus());
         holder.tvType.setText(transaction.getType());
