@@ -1,18 +1,44 @@
 package com.arie.onlineloan.models;
 
+import org.json.JSONObject;
+
 public class Vehicle {
+    private String id;
     private String type;
     private String brand;
     private String model;
     private String year;
     private double price;
 
-    public Vehicle(String type, String brand, String model, String year, double price) {
+
+    public Vehicle(JSONObject object) {
+        try {
+            this.id = object.getString("ID");
+            this.type = object.getString("TYPE");
+            this.brand = object.getString("BRAND");
+            this.model = object.getString("MODEL");
+            this.year = object.getString("YEAR");
+            this.price = Double.parseDouble(object.getString("PRICE"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Vehicle(String id, String type, String brand, String model, String year, double price) {
+        this.id = id;
         this.type = type;
         this.brand = brand;
         this.model = model;
         this.year = year;
         this.price = price;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getType() {

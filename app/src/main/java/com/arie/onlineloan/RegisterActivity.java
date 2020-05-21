@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,13 +33,16 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
     Toolbar toolbar;
     private TextView tvFullname;
+    private TextView tvDob;
     private TextView tvNik;
     private TextView tvEmail;
     private TextView tvPhone;
     private TextView tvAddress;
     private TextView tvPass1;
     private TextView tvPass2;
+    private LinearLayout llData;
     private User user;
+    private boolean isEligible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,27 +56,40 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         tvFullname = findViewById(R.id.txt_fullname);
+        tvDob = findViewById(R.id.txt_dob);
         tvNik = findViewById(R.id.txt_nik);
         tvEmail = findViewById(R.id.txt_email);
         tvPhone = findViewById(R.id.txt_phone);
         tvAddress = findViewById(R.id.txt_address);
         tvPass1 = findViewById(R.id.txt_pass);
         tvPass2 = findViewById(R.id.txt_repass);
+        llData = findViewById(R.id.ll_data);
         Button btnRegist = findViewById(R.id.btn_regist);
+        Button btnCheckNik = findViewById(R.id.btn_check_nik);
 
+        llData.setVisibility(View.GONE);
         btnRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isValid()) {
+                if (isValidRegist() && isEligible) {
                     user = new User();
-                    user.setFullname(tvFullname.getText().toString().trim());
                     user.setNik(tvNik.getText().toString().trim());
                     user.setEmail(tvEmail.getText().toString().trim());
-                    user.setAddress(tvAddress.getText().toString().trim());
                     user.setPassword(tvPass1.getText().toString().trim());
-                    user.setPhone(tvPhone.getText().toString().trim());
 
                     hitRegist(user);
+                }
+            }
+        });
+
+        btnCheckNik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isValidNik()) {
+                    user = new User();
+                    user.setNik(tvNik.getText().toString().trim());
+                    user.setEmail(tvEmail.getText().toString().trim());
+                    checkNik(user);
                 }
             }
         });
@@ -88,24 +105,24 @@ public class RegisterActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean isValid() {
+    private boolean isValidNik() {
         boolean isValid = false;
-        if (tvFullname.getText().toString().trim().isEmpty()) {
-            tvFullname.setError("Fullname Can't be Empty!");
-            tvFullname.requestFocus();
-        } else if (tvNik.getText().toString().trim().isEmpty()) {
+        if (tvNik.getText().toString().trim().isEmpty()) {
             tvNik.setError("NIK Field Can't be Empty!");
             tvNik.requestFocus();
         } else if (tvEmail.getText().toString().trim().isEmpty()) {
             tvEmail.setError("Email Field Can't be Empty!");
             tvEmail.requestFocus();
-        } else if (tvPhone.getText().toString().trim().isEmpty()) {
-            tvPhone.setError("Phone Number Field Can't be Empty!");
-            tvPhone.requestFocus();
-        } else if (tvAddress.getText().toString().trim().isEmpty()) {
-            tvAddress.setError("Email Field Can't be Empty!");
-            tvAddress.requestFocus();
-        } else if (tvPass1.getText().toString().trim().isEmpty()) {
+        } else {
+            isValid = true;
+        }
+
+        return isValid;
+    }
+
+    private boolean isValidRegist() {
+        boolean isValid = false;
+        if (tvPass1.getText().toString().trim().isEmpty()) {
             tvPass1.setError("Password Field Can't be Empty!");
             tvPass1.requestFocus();
         } else if (tvPass2.getText().toString().isEmpty()) {
@@ -118,6 +135,57 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         return isValid;
+    }
+
+    private void checkNik(final User user) {
+        RequestQueue mRequestQueue = Volley.newRequestQueue(RegisterActivity.this);
+
+        StringRequest mStringRequest = new StringRequest(Request.Method.POST, phpConf.URL_CHECK_NIK, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Log.d(TAG, s);
+                try {
+                    Log.d("Json checkNik", s);
+                    JSONObject jsonObject = new JSONObject(s);
+                    JSONArray result = jsonObject.getJSONArray("result");
+                    JSONObject jo = result.getJSONObject(0);
+
+                    Log.d("tagJsonObject", jo.toString());
+                    String response = jo.getString("response");
+
+
+                    if (response.equals("1")) {
+                        isEligible = true;
+                        llData.setVisibility(View.VISIBLE);
+                        JSONArray data = jo.getJSONArray("DATA");
+                        JSONObject dataObject = data.getJSONObject(0);
+
+                        tvFullname.setText(dataObject.getString("FULLNAME"));
+                        tvDob.setText(dataObject.getString("DATE_OF_BIRTH"));
+                        tvPhone.setText(dataObject.getString("PHONE"));
+                        tvAddress.setText(dataObject.getString("ADDRESS"));
+                    }else{
+                        llData.setVisibility(View.GONE);
+                        Toast.makeText(RegisterActivity.this, jo.getString("message"), Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(RegisterActivity.this, getString(R.string.msg_something_wrong), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(RegisterActivity.this, getString(R.string.msg_connection_error), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected java.util.Map<String, String> getParams() {
+                java.util.Map<String, String> params = new HashMap<>();
+                params.put("NIK", user.getNik());
+                return params;
+            }
+        };
+        mRequestQueue.add(mStringRequest);
     }
 
     private void hitRegist(final User user) {
@@ -138,13 +206,11 @@ public class RegisterActivity extends AppCompatActivity {
                     String response = jo.getString("STATUS");
                     String message = jo.getString("message");
 
-
                     Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
 
                     if (response.equals("1")) {
                         Intent in = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(in);
-                        //todo differentiate session (admin and user)
                     }
                 } catch (JSONException e) {
                     Toast.makeText(RegisterActivity.this, getString(R.string.msg_something_wrong), Toast.LENGTH_SHORT).show();
@@ -160,11 +226,8 @@ public class RegisterActivity extends AppCompatActivity {
             protected java.util.Map<String, String> getParams() {
                 java.util.Map<String, String> params = new HashMap<>();
                 params.put("EMAIL", user.getEmail());
-                params.put("FULLNAME", user.getFullname());
                 params.put("NIK", user.getNik());
                 params.put("PASSWORD", user.getPassword());
-                params.put("ADDRESS", user.getAddress());
-                params.put("PHONE", user.getPhone());
                 return params;
             }
         };

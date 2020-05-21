@@ -241,25 +241,13 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <LinearLayout
+        <TextView
+            style="@style/Text.Title"
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
-            <TextView
-                style="@style/Text.Title"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/vehicle_price" />
+            android:text="@string/vehicle_price" />
 
-            <ImageView
-                android:id="@+id/img_edit_vehicle"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="end"
-                app:srcCompat="@drawable/ic_edit"/>
-        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_vehicle_price"

@@ -1,11 +1,15 @@
 package com.arie.onlineloan;
 
 public class phpConf {
-    private final static String ip = "192.168.1.6";
+    private final static String ip = "192.168.1.5";
 
     public final static String URL_CONNECTION = "https://"+ ip +"/onlineloan/connection.php";
     public final static String URL_LOGIN = "https://"+ ip +"/onlineloan/login.php";
+    public final static String URL_CHECK_NIK = "https://"+ ip +"/onlineloan/check_nik.php";
     public final static String URL_REGISTER = "https://"+ ip +"/onlineloan/register.php";
+    public final static String URL_GET_ALL_VEHICLE = "https://"+ ip +"/onlineloan/get_all_vehicle.php";
+    public final static String URL_UPDATE_VEHICLE_PRICE = "https://"+ ip +"/onlineloan/update_vehicle_price.php";
+    public final static String URL_GET_APPROVED_REJECTED_TRX = "https://"+ ip +"/onlineloan/get_approved_rejected_trx.php";
     public final static String URL_APPLY_NON_COLLATERAL = "https://"+ ip +"/onlineloan/apply_collateral_non.php";
     public final static String URL_APPLY_COLLATERAL_VEHICLE = "https://"+ ip +"/onlineloan/apply_collateral_vehicle.php";
     public final static String URL_APPLY_COLLATERAL_HOUSE = "https://"+ ip +"/onlineloan/apply_collateral_house.php";

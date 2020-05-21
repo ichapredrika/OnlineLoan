@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,8 +34,10 @@ public class TransactionActivity extends AppCompatActivity {
     private RecyclerView rvTransaction;
     private LinearLayout llTransReport;
     private Transaction transaction;
+    private TextView tvApproved, tvRejected;
     private TransactionAdapter transactionAdapter;
     private ProgressDialog loading;
+    private String url;
 
     User user;
     UserPreference mUserPreference;
@@ -62,6 +64,8 @@ public class TransactionActivity extends AppCompatActivity {
         origin = intent.getStringExtra("origin");
         rvTransaction = findViewById(R.id.rv_transaction);
         llTransReport = findViewById(R.id.ll_trans_report);
+        tvApproved = findViewById(R.id.txt_approved);
+        tvRejected = findViewById(R.id.txt_rejected);
 
         transactionAdapter = new TransactionAdapter(TransactionActivity.this, listTransactionToAdapter, origin);
         transactionAdapter.notifyDataSetChanged();
@@ -71,13 +75,13 @@ public class TransactionActivity extends AppCompatActivity {
 
         if (type.equals(LIST_USER)) {
             getUserTrans();
-            llTransReport.setVisibility(View.GONE);
+            llTransReport.setVisibility(View.VISIBLE);
         } else if (type.equals(LIST_ADMIN)) {
-            getAllTrans();
-            llTransReport.setVisibility(View.GONE);
+            getApprovedRejected();
+            llTransReport.setVisibility(View.VISIBLE);
         } else if (type.equals(LIST_PENDING)) {
             getPendingTrans();
-            llTransReport.setVisibility(View.VISIBLE);
+            llTransReport.setVisibility(View.GONE);
         }
     }
 
@@ -99,6 +103,11 @@ public class TransactionActivity extends AppCompatActivity {
                     String response = jo.getString("response");
 
                     if (response.equals("1")) {
+                        JSONArray transCount= jo.getJSONArray("TRXCOUNT");
+                        String approved = transCount.getJSONObject(0).getString("COUNT");
+                        tvApproved.setText("Approved : " +approved);
+                        String rejected = transCount.getJSONObject(1).getString("COUNT");
+                        tvRejected.setText("Rejected : " +rejected);
                         JSONArray transCast = jo.getJSONArray("TRX");
                         for (int i = 0; i < transCast.length(); i++) {
                             JSONObject object = transCast.getJSONObject(i);
@@ -107,6 +116,8 @@ public class TransactionActivity extends AppCompatActivity {
                         }
                         updateAdapter(listTransaction);
                     } else {
+                        tvApproved.setText("Apporved: 0");
+                        tvRejected.setText("Rejected: 0");
                         loading.dismiss();
                         String message = jo.getString("message");
                         Toast.makeText(TransactionActivity.this, message, Toast.LENGTH_SHORT).show();
@@ -137,11 +148,11 @@ public class TransactionActivity extends AppCompatActivity {
         mRequestQueue.add(mStringRequest);
     }
 
-    private void getAllTrans() {
+    private void getApprovedRejected() {
         loading = ProgressDialog.show(TransactionActivity.this, "Loading Data...", "Please Wait...", false, false);
         RequestQueue mRequestQueue = Volley.newRequestQueue(TransactionActivity.this);
 
-        StringRequest mStringRequest = new StringRequest(Request.Method.GET, phpConf.URL_GET_ALL_TRANSACTION, new Response.Listener<String>() {
+        StringRequest mStringRequest = new StringRequest(Request.Method.GET, phpConf.URL_GET_APPROVED_REJECTED_TRX, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 try {
@@ -155,7 +166,12 @@ public class TransactionActivity extends AppCompatActivity {
                     String response = jo.getString("response");
 
                     if (response.equals("1")) {
-                        JSONArray transCast = jo.getJSONArray("TRX");
+                        JSONArray transCount= jo.getJSONArray("TRXCOUNT");
+                        String approved = transCount.getJSONObject(0).getString("COUNT");
+                        tvApproved.setText("Approved : " +approved);
+                        String rejected = transCount.getJSONObject(1).getString("COUNT");
+                        tvRejected.setText("Rejected : " +rejected);
+                        JSONArray transCast = jo.getJSONArray("DATA");
                         for (int i = 0; i < transCast.length(); i++) {
                             JSONObject object = transCast.getJSONObject(i);
                             transaction = new Transaction(object);

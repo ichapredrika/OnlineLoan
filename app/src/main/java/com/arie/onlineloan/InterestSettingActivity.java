@@ -1,6 +1,8 @@
 package com.arie.onlineloan;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.graphics.LinearGradient;
@@ -19,12 +21,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.arie.onlineloan.adapters.TransactionAdapter;
+import com.arie.onlineloan.adapters.VehicleAdapter;
+import com.arie.onlineloan.models.Transaction;
 import com.arie.onlineloan.models.User;
+import com.arie.onlineloan.models.Vehicle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InterestSettingActivity extends AppCompatActivity {
@@ -35,8 +42,14 @@ public class InterestSettingActivity extends AppCompatActivity {
     private TextView tvNonCollateral, tvCollateralCar, tvCollateralMotorcycle, tvCollateralHouse;
     private TextView tvNonCollateralEdit, tvCollateralCarEdit, tvCollateralMotorcycleEdit, tvCollateralHouseEdit;
     private Button btnSaveInterest;
+    private RecyclerView rvVehicle;
+    private Vehicle vehicle;
+    private VehicleAdapter vehicleAdapter;
     private LinearLayout llInterest, llEdit;
     private ImageView imgEdit;
+    private ArrayList<Vehicle> listVehicle = new ArrayList<>();
+    private ArrayList<Vehicle> listVehicleToAdapter = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +68,13 @@ public class InterestSettingActivity extends AppCompatActivity {
         tvCollateralHouseEdit = findViewById(R.id.txt_collateral_house_edit);
         btnSaveInterest = findViewById(R.id.btn_save_interest);
         imgEdit = findViewById(R.id.img_edit);
+        rvVehicle = findViewById(R.id.rv_vehicle_price);
+
+        vehicleAdapter = new VehicleAdapter(InterestSettingActivity.this, listVehicleToAdapter);
+        vehicleAdapter.notifyDataSetChanged();
+        rvVehicle.setHasFixedSize(true);
+        rvVehicle.setLayoutManager(new LinearLayoutManager(InterestSettingActivity.this));
+        rvVehicle.setAdapter(vehicleAdapter);
 
         imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +99,7 @@ public class InterestSettingActivity extends AppCompatActivity {
     }
 
     private void hitInterest() {
-        loading = ProgressDialog.show(InterestSettingActivity.this, "Loading Data...", "Please Wait...", false, false);
+        loading = ProgressDialog.show(InterestSettingActivity.this, "Loading Interest...", "Please Wait...", false, false);
         RequestQueue mRequestQueue = Volley.newRequestQueue(InterestSettingActivity.this);
 
         StringRequest mStringRequest = new StringRequest(Request.Method.GET, phpConf.URL_GET_INTEREST, new Response.Listener<String>() {
@@ -89,12 +109,10 @@ public class InterestSettingActivity extends AppCompatActivity {
                     Log.d("Json Interest", s);
                     JSONObject jsonObject = new JSONObject(s);
                     JSONArray data = jsonObject.getJSONArray("result");
-
                     JSONObject jo = data.getJSONObject(0);
 
                     Log.d("tagJsonObject", jo.toString());
                     String response = jo.getString("response");
-
 
                     if (response.equals("1")) {
                         JSONArray jsonData = jo.getJSONArray("DATA");
@@ -127,6 +145,7 @@ public class InterestSettingActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 loading.dismiss();
+                getVehicle();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -191,5 +210,60 @@ public class InterestSettingActivity extends AppCompatActivity {
             }
         };
         mRequestQueue.add(mStringRequest);
+    }
+
+    private void getVehicle() {
+        loading = ProgressDialog.show(InterestSettingActivity.this, "Loading Vehicle...", "Please Wait...", false, false);
+        RequestQueue mRequestQueue = Volley.newRequestQueue(InterestSettingActivity.this);
+
+        StringRequest mStringRequest = new StringRequest(Request.Method.GET, phpConf.URL_GET_ALL_VEHICLE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                try {
+                    Log.d("Json getAllTrans", s);
+                    JSONObject jsonObject = new JSONObject(s);
+                    JSONArray data = jsonObject.getJSONArray("result");
+                    JSONObject jo = data.getJSONObject(0);
+
+                    Log.d("tagJsonObject", jo.toString());
+                    String response = jo.getString("response");
+
+                    if (response.equals("1")) {
+
+                        JSONArray transCast = jo.getJSONArray("DATA");
+                        for (int i = 0; i < transCast.length(); i++) {
+                            JSONObject object = transCast.getJSONObject(i);
+                            vehicle = new Vehicle(object);
+                            listVehicle.add(vehicle);
+                        }
+                        updateAdapter(listVehicle);
+                        loading.dismiss();
+                    } else {
+                        loading.dismiss();
+                        String message = jo.getString("message");
+                        Toast.makeText(InterestSettingActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                    loading.dismiss();
+                } catch (JSONException e) {
+                    loading.dismiss();
+                    e.printStackTrace();
+                }
+                loading.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                Log.d("tag", String.valueOf(error));
+                Toast.makeText(InterestSettingActivity.this, getString(R.string.msg_connection_error), Toast.LENGTH_SHORT).show();
+            }
+        });
+        mRequestQueue.add(mStringRequest);
+    }
+
+    private void updateAdapter(ArrayList<Vehicle> list) {
+        listVehicleToAdapter.clear();
+        listVehicleToAdapter.addAll(list);
+        vehicleAdapter.notifyDataSetChanged();
     }
 }
